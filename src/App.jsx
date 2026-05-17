@@ -639,7 +639,7 @@ export default function App() {
         {/* FOOTER */}
         <div style={{textAlign:"center",color:"var(--muted)",fontSize:"11px",marginTop:"60px",borderTop:"1px solid var(--border)",paddingTop:"20px"}}>
           {lastUpdated && !isSimulated && <span>Last updated: {lastUpdated.toLocaleTimeString(undefined,{hour:"2-digit",minute:"2-digit"})} &nbsp;·&nbsp; </span>}
-          Data powered by API-Football &nbsp;·&nbsp; Not affiliated with FIFA
+          Not affiliated with FIFA
         </div>
       </div>
     </>
