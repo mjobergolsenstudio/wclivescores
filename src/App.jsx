@@ -344,6 +344,20 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);min-height:100
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-thumb{background:var(--s3);border-radius:3px}
 
+/* BETTING WIDGET */
+.bw{background:var(--s2);border-top:2px solid #F5C842;padding:12px 16px 14px}
+.bw-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.bw-title{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#F5C842}
+.bw-age{font-size:9px;color:var(--muted)}
+.bw-row{display:flex;gap:6px;flex-wrap:wrap}
+.bw-bookie{flex:1;min-width:100px;background:var(--s1);border:1px solid var(--border);border-radius:8px;padding:8px 10px;text-decoration:none;display:flex;flex-direction:column;gap:3px;transition:border-color .2s,transform .15s}
+.bw-bookie:hover{border-color:rgba(245,200,66,.35);transform:translateY(-1px)}
+.bw-bname{font-size:11px;font-weight:700;color:var(--text)}
+.bw-offer{font-size:10px;color:#22C55E;font-weight:500}
+.bw-cta{font-size:9px;color:var(--muted);margin-top:1px}
+.bw-more{display:block;text-align:center;font-size:10px;color:var(--muted);text-decoration:none;margin-top:8px;transition:color .2s}
+.bw-more:hover{color:#F5C842}
+
 @media(max-width:640px){
   .tname{font-size:11px;max-width:75px}.score{font-size:28px}.mc-main{padding:10px 14px 16px;gap:8px}
   .tflag{font-size:20px}.tables-wrap{grid-template-columns:1fr}.sinp{width:140px}
@@ -463,6 +477,36 @@ export default function App() {
     );
   }
 
+  function BettingWidget() {
+    return (
+      <div className="bw">
+        <div className="bw-hdr">
+          <span className="bw-title">⚡ Bet on this match</span>
+          <span className="bw-age">18+ | T&amp;Cs apply</span>
+        </div>
+        <div className="bw-row">
+          {/* Replace href values with your affiliate links once approved */}
+          <a href="YOUR_BET365_AFFILIATE_LINK" className="bw-bookie" target="_blank" rel="noopener sponsored">
+            <span className="bw-bname">Bet365</span>
+            <span className="bw-offer">Up to $200 in credits</span>
+            <span className="bw-cta">Claim offer →</span>
+          </a>
+          <a href="YOUR_UNIBET_AFFILIATE_LINK" className="bw-bookie" target="_blank" rel="noopener sponsored">
+            <span className="bw-bname">Unibet</span>
+            <span className="bw-offer">$40 Free Bet</span>
+            <span className="bw-cta">Claim offer →</span>
+          </a>
+          <a href="YOUR_WILLIAMHILL_AFFILIATE_LINK" className="bw-bookie" target="_blank" rel="noopener sponsored">
+            <span className="bw-bname">William Hill</span>
+            <span className="bw-offer">Bet $10 Get $30</span>
+            <span className="bw-cta">Claim offer →</span>
+          </a>
+        </div>
+        <a href="/betting.html" className="bw-more">Compare all WC 2026 bonuses →</a>
+      </div>
+    );
+  }
+
   function MatchCard({ m, showTip=false }) {
     const isFav=fmIds.includes(m.id),isExp=expanded[m.id];
     const hw=m.status==="finished"&&(m.home_score??0)>(m.away_score??0);
@@ -498,6 +542,7 @@ export default function App() {
             ))}
           </div>
         )}
+        {m.status!=="upcoming"&&<BettingWidget/>}
         {(showTip||tab==="tipping")&&(
           <div className="tip-panel">
             <span className="tip-label">🏆 Tip</span>
@@ -579,6 +624,7 @@ export default function App() {
             {id:"teamstats",l:"Team Stats"},
             {id:"teams",l:"All Teams"},
             {id:"favorites",l:`⭐ Favourites${favCount>0?` (${favCount})`:""}`},
+            {id:"betting",l:"💰 Bonuses"},
           ].map(t=><button key={t.id} className={`tab ${tab===t.id?"on":""}`} onClick={()=>setTab(t.id)}>{t.l}</button>)}
         </div>
 
@@ -635,6 +681,17 @@ export default function App() {
           <div className="tables-wrap">{groupKeys.filter(g=>gf==="all"||gf===g).map(g=><GroupTable key={g} group={g}/>)}</div></>
         )}
 
+        {/* BETTING */}
+        {tab==="betting"&&(
+          <div style={{textAlign:"center",padding:"40px 16px"}}>
+            <div style={{fontSize:"32px",marginBottom:"12px"}}>💰</div>
+            <div style={{fontFamily:"var(--fd)",fontSize:"28px",letterSpacing:"2px",marginBottom:"8px"}}>WC 2026 Betting Bonuses</div>
+            <div style={{color:"var(--muted)",fontSize:"14px",marginBottom:"24px"}}>Compare the best sportsbook welcome offers for the World Cup</div>
+            <a href="/betting.html" style={{display:"inline-block",background:"#F5C842",color:"#060A14",fontWeight:"700",fontSize:"15px",padding:"14px 32px",borderRadius:"12px",textDecoration:"none"}}>View All Bonuses →</a>
+            <div style={{fontSize:"11px",color:"var(--muted)",marginTop:"12px"}}>18+ | Gamble responsibly | T&Cs apply</div>
+          </div>
+        )}
+
         {/* BRACKET */}
         {tab==="bracket"&&(
           <><div className="sl">Knockout Bracket</div><Bracket matches={matches}/></>
@@ -665,7 +722,7 @@ export default function App() {
 
         <div style={{textAlign:"center",color:"var(--muted)",fontSize:"11px",marginTop:"60px",borderTop:"1px solid var(--border)",paddingTop:"20px"}}>
           {lastUpdated&&!isSimulated&&<span>Last updated: {lastUpdated.toLocaleTimeString(undefined,{hour:"2-digit",minute:"2-digit"})} &nbsp;·&nbsp; </span>}
-          Not affiliated with FIFA
+          Not affiliated with FIFA &nbsp;·&nbsp; <a href="/betting.html" style={{color:"var(--muted)",textDecoration:"none"}}>Betting Bonuses</a> &nbsp;·&nbsp; <span style={{fontSize:"10px"}}>18+ Gamble Responsibly</span>
         </div>
       </div>
     </>
