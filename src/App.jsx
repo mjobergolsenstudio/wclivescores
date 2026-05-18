@@ -280,30 +280,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);min-height:100
 .ev-txt{color:var(--text);flex:1}
 .ev-team{font-size:10px;color:var(--muted);margin-left:auto;white-space:nowrap}
 
-/* TIPPING */
-.tip-panel{border-top:1px solid var(--border);padding:10px 20px;background:rgba(255,215,0,.03);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.tip-label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--gold);min-width:60px}
-.tip-inputs{display:flex;align-items:center;gap:8px}
-.tip-inp{width:40px;height:34px;background:var(--s2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--fd);font-size:18px;text-align:center;outline:none;transition:border-color .2s}
-.tip-inp:focus{border-color:var(--gold)}
-.tip-sep{font-family:var(--fd);font-size:18px;color:var(--muted)}
-.tip-save{padding:7px 16px;background:var(--gold);border:none;border-radius:8px;color:#000;font-family:var(--fb);font-size:12px;font-weight:700;cursor:pointer;transition:opacity .2s}
-.tip-save:hover{opacity:.85}
-.tip-result{font-size:12px;font-weight:600;padding:5px 12px;border-radius:8px}
-.tip-exact{background:rgba(0,255,136,.15);color:var(--live)}
-.tip-correct{background:rgba(0,229,255,.12);color:var(--accent)}
-.tip-wrong{background:rgba(255,80,80,.1);color:#FF8080}
-.tip-pts{font-family:var(--fd);font-size:16px;margin-left:4px}
-.tip-summary{background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:20px}
-.tip-summary-title{font-family:var(--fd);font-size:24px;letter-spacing:2px;color:var(--gold);margin-bottom:4px}
-.tip-summary-sub{font-size:13px;color:var(--muted)}
-.tip-score-big{font-family:var(--fd);font-size:56px;color:var(--text);line-height:1;margin:12px 0 4px}
-.tip-score-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
-.tip-breakdown{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
-.tip-stat{background:var(--s2);border-radius:10px;padding:10px 16px;text-align:center;flex:1;min-width:80px}
-.tip-stat-num{font-family:var(--fd);font-size:28px;color:var(--text)}
-.tip-stat-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:2px}
-
 /* STANDINGS */
 .tables-wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;margin-top:8px}
 .group-table{background:var(--s1);border:1px solid var(--border);border-radius:16px;overflow:hidden}
@@ -344,9 +320,30 @@ body{background:var(--bg);color:var(--text);font-family:var(--fb);min-height:100
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-thumb{background:var(--s3);border-radius:3px}
 
+/* PLAYERS */
+.pl-filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.pl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.pl-card{background:var(--s1);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .2s}
+.pl-card:hover{border-color:rgba(0,229,255,.25)}
+.pl-head{background:var(--s2);padding:12px 14px;display:flex;align-items:center;gap:10px}
+.pl-flag{font-size:22px}
+.pl-name{font-size:14px;font-weight:600;color:var(--text);flex:1}
+.pl-team{font-size:11px;color:var(--muted)}
+.pl-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.pl-stat{background:var(--s1);padding:10px 8px;text-align:center}
+.pl-stat-num{font-family:var(--fd);font-size:22px;color:var(--text);line-height:1}
+.pl-stat-num.goals{color:var(--live)}
+.pl-stat-num.yellow{color:var(--gold)}
+.pl-stat-num.red{color:#FF6060}
+.pl-stat-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.pl-sort-btn{padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:var(--fb);font-size:11px;cursor:pointer;transition:all .18s}
+.pl-sort-btn:hover{border-color:var(--accent);color:var(--text)}
+.pl-sort-btn.on{background:rgba(0,229,255,.12);border-color:var(--accent);color:var(--accent)}
+.pl-rank{font-family:var(--fd);font-size:20px;color:var(--border);min-width:28px}
+.pl-rank.top{color:var(--gold)}
+
 /* BETTING WIDGET */
-.bw{background:var(--s2);border-top:2px solid #F5C842;padding:12px 16px 14px}
-.bw-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.bw{background:var(--s2);border-top:2px solid #F5C842;padding:12px 16px 14px}.bw-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .bw-title{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#F5C842}
 .bw-age{font-size:9px;color:var(--muted)}
 .bw-row{display:flex;gap:6px;flex-wrap:wrap}
@@ -382,8 +379,6 @@ export default function App() {
 
   const [fmIds, setFmIds] = useState(() => { try { return JSON.parse(localStorage.getItem("wc_fm")||"[]"); } catch { return []; } });
   const [ftNames, setFtNames] = useState(() => { try { return JSON.parse(localStorage.getItem("wc_ft")||"[]"); } catch { return []; } });
-  const [tips, setTips] = useState(() => { try { return JSON.parse(localStorage.getItem("wc_tips")||"{}"); } catch { return {}; } });
-  const [tipDraft, setTipDraft] = useState({});
 
   const fetchMatches = useCallback(async () => {
     if (!isTournamentLive()) { setMatches(generateSimulatedMatches()); setIsSimulated(true); setLoading(false); return; }
@@ -417,7 +412,6 @@ export default function App() {
   useEffect(() => { if ("Notification" in window) setNotifyEnabled(Notification.permission === "granted"); }, []);
   useEffect(() => { try { localStorage.setItem("wc_fm", JSON.stringify(fmIds)); } catch {} }, [fmIds]);
   useEffect(() => { try { localStorage.setItem("wc_ft", JSON.stringify(ftNames)); } catch {} }, [ftNames]);
-  useEffect(() => { try { localStorage.setItem("wc_tips", JSON.stringify(tips)); } catch {} }, [tips]);
 
   const requestNotifications = async () => {
     if (!("Notification" in window)) { alert("Notifications not supported in this browser."); return; }
@@ -429,21 +423,10 @@ export default function App() {
   const toggleFM = id => setFmIds(p => p.includes(id) ? p.filter(x=>x!==id) : [...p,id]);
   const toggleFT = n  => setFtNames(p => p.includes(n)  ? p.filter(x=>x!==n)  : [...p,n]);
   const toggleExp = id => setExpanded(p => ({...p,[id]:!p[id]}));
-  const saveTip = (matchId) => {
-    const d = tipDraft[matchId];
-    if (!d || d.home === "" || d.away === "") return;
-    setTips(p => ({...p,[matchId]:{home:parseInt(d.home),away:parseInt(d.away)}}));
-  };
-
   const liveCount = matches.filter(m=>m.status==="live").length;
   const favCount = fmIds.length + ftNames.length;
   const nextMatch = matches.find(m=>m.status==="upcoming"&&m.kickoff);
   const countdown = useCountdown(nextMatch?.kickoff);
-
-  const tippedFinished = matches.filter(m=>tips[m.id]!==undefined&&m.status==="finished");
-  const totalPoints = tippedFinished.reduce((s,m)=>s+(scoreTip(tips[m.id],m)||0),0);
-  const exactCount = tippedFinished.filter(m=>scoreTip(tips[m.id],m)===3).length;
-  const correctCount = tippedFinished.filter(m=>scoreTip(tips[m.id],m)===1).length;
 
   const groupKeys = matches.length ? [...new Set(matches.map(m=>m.group))].filter(Boolean).sort() : Object.keys(GROUPS_STATIC);
 
@@ -477,6 +460,76 @@ export default function App() {
     );
   }
 
+  function PlayersTab({ matches }) {
+    const [sortBy, setSortBy] = useState("goals");
+    const [search, setSearch] = useState("");
+
+    // Build player stats from match events
+    const playerMap = {};
+    matches.forEach(m => {
+      if (m.status === "upcoming") return;
+      (m.events||[]).forEach(ev => {
+        const key = `${ev.player}__${ev.team}`;
+        if (!playerMap[key]) playerMap[key] = { name: ev.player, team: m.home === ev.team ? m.home : m.away, goals: 0, yellows: 0, reds: 0 };
+        if (ev.type === "goal" && ev.extra !== "o.g.") playerMap[key].goals++;
+        if (ev.type === "yellow") playerMap[key].yellows++;
+        if (ev.type === "red") playerMap[key].reds++;
+      });
+    });
+
+    let players = Object.values(playerMap);
+    if (search) players = players.filter(p => p.name.toLowerCase().includes(search.toLowerCase()) || p.team.toLowerCase().includes(search.toLowerCase()));
+    players = players.sort((a,b) => b[sortBy === "goals" ? "goals" : sortBy === "yellow" ? "yellows" : "reds"] - a[sortBy === "goals" ? "goals" : sortBy === "yellow" ? "yellows" : "reds"]);
+
+    return (
+      <>
+        <div className="pl-filters">
+          <span style={{fontSize:"11px",fontWeight:"700",letterSpacing:"1px",textTransform:"uppercase",color:"var(--muted)"}}>Sort by</span>
+          {[{id:"goals",l:"⚽ Goals"},{id:"yellow",l:"🟨 Yellow cards"},{id:"red",l:"🟥 Red cards"}].map(s=>(
+            <button key={s.id} className={`pl-sort-btn ${sortBy===s.id?"on":""}`} onClick={()=>setSortBy(s.id)}>{s.l}</button>
+          ))}
+          <div className="swrap">
+            <span className="sico">🔍</span>
+            <input className="sinp" placeholder="Search player / team…" value={search} onChange={e=>setSearch(e.target.value)}/>
+          </div>
+        </div>
+
+        {players.length === 0 && (
+          <div className="empty"><div className="eico">⚽</div><div>No player data yet — available once matches kick off.</div></div>
+        )}
+
+        <div className="pl-grid">
+          {players.slice(0,48).map((p,i) => (
+            <div key={`${p.name}${p.team}`} className="pl-card">
+              <div className="pl-head">
+                <span className="pl-rank" style={i<3?{color:"var(--gold)"}:{}}>{i+1}</span>
+                <span className="pl-flag">{FLAGS[p.team]||"🏳️"}</span>
+                <div style={{flex:1}}>
+                  <div className="pl-name">{p.name}</div>
+                  <div className="pl-team">{p.team}</div>
+                </div>
+              </div>
+              <div className="pl-stats">
+                <div className="pl-stat">
+                  <div className={`pl-stat-num goals`}>{p.goals}</div>
+                  <div className="pl-stat-label">Goals</div>
+                </div>
+                <div className="pl-stat">
+                  <div className={`pl-stat-num yellow`}>{p.yellows}</div>
+                  <div className="pl-stat-label">Yellow</div>
+                </div>
+                <div className="pl-stat">
+                  <div className={`pl-stat-num red`}>{p.reds}</div>
+                  <div className="pl-stat-label">Red</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </>
+    );
+  }
+
   function BettingWidget() {
     return (
       <div className="bw">
@@ -485,7 +538,6 @@ export default function App() {
           <span className="bw-age">18+ | T&amp;Cs apply</span>
         </div>
         <div className="bw-row">
-          {/* Replace href values with your affiliate links once approved */}
           <a href="YOUR_BET365_AFFILIATE_LINK" className="bw-bookie" target="_blank" rel="noopener sponsored">
             <span className="bw-bname">Bet365</span>
             <span className="bw-offer">Up to $200 in credits</span>
@@ -507,13 +559,11 @@ export default function App() {
     );
   }
 
-  function MatchCard({ m, showTip=false }) {
+  function MatchCard({ m }) {
     const isFav=fmIds.includes(m.id),isExp=expanded[m.id];
     const hw=m.status==="finished"&&(m.home_score??0)>(m.away_score??0);
     const aw=m.status==="finished"&&(m.away_score??0)>(m.home_score??0);
     const hasEv=m.events&&m.events.length>0;
-    const savedTip=tips[m.id];const tipScore=savedTip?scoreTip(savedTip,m):null;
-    const draft=tipDraft[m.id]||{home:"",away:""};
     return (
       <div className={`mc ${m.status}`}>
         <div className="mc-main" onClick={()=>hasEv&&toggleExp(m.id)}>
@@ -543,28 +593,6 @@ export default function App() {
           </div>
         )}
         {m.status!=="upcoming"&&<BettingWidget/>}
-        {(showTip||tab==="tipping")&&(
-          <div className="tip-panel">
-            <span className="tip-label">🏆 Tip</span>
-            {savedTip&&m.status==="finished"?(
-              <><span style={{fontFamily:"var(--fd)",fontSize:"14px",color:"var(--muted)",letterSpacing:"1px"}}>{savedTip.home} – {savedTip.away}</span>
-              <span className={`tip-result ${tipScore===3?"tip-exact":tipScore===1?"tip-correct":"tip-wrong"}`}>{tipScore===3?"🎯 Exact!":tipScore===1?"✅ Correct":"❌ Wrong"}<span className="tip-pts"> +{tipScore}pts</span></span></>
-            ):savedTip&&m.status!=="finished"?(
-              <><span style={{fontFamily:"var(--fd)",fontSize:"14px",letterSpacing:"1px",color:"var(--muted)"}}>{savedTip.home} – {savedTip.away}</span>
-              <span style={{fontSize:"11px",color:"var(--muted)"}}>Tip locked ✓</span>
-              <button style={{marginLeft:"auto",background:"none",border:"1px solid var(--border)",borderRadius:"6px",color:"var(--muted)",fontSize:"11px",padding:"3px 8px",cursor:"pointer"}} onClick={()=>setTips(p=>{const n={...p};delete n[m.id];return n;})}>Edit</button></>
-            ):m.status==="finished"?(
-              <span style={{fontSize:"12px",color:"var(--muted)"}}>No tip placed</span>
-            ):(
-              <><div className="tip-inputs">
-                <input className="tip-inp" type="number" min="0" max="20" placeholder="0" value={draft.home} onChange={e=>setTipDraft(p=>({...p,[m.id]:{...draft,home:e.target.value}}))}/>
-                <span className="tip-sep">–</span>
-                <input className="tip-inp" type="number" min="0" max="20" placeholder="0" value={draft.away} onChange={e=>setTipDraft(p=>({...p,[m.id]:{...draft,away:e.target.value}}))}/>
-              </div>
-              <button className="tip-save" onClick={()=>saveTip(m.id)}>Save</button></>
-            )}
-          </div>
-        )}
       </div>
     );
   }
@@ -618,13 +646,12 @@ export default function App() {
         <div className="tabs">
           {[
             {id:"matches",l:"Matches"},
-            {id:"tipping",l:`🏆 Tipping${totalPoints>0?` · ${totalPoints}pts`:""}`},
             {id:"tables",l:"Standings"},
             {id:"bracket",l:"🗓 Bracket"},
+            {id:"players",l:"⚽ Players"},
             {id:"teamstats",l:"Team Stats"},
-            {id:"teams",l:"All Teams"},
             {id:"favorites",l:`⭐ Favourites${favCount>0?` (${favCount})`:""}`},
-            {id:"betting",l:"💰 Bonuses"},
+            {id:"betting",l:"💰 Betting"},
           ].map(t=><button key={t.id} className={`tab ${tab===t.id?"on":""}`} onClick={()=>setTab(t.id)}>{t.l}</button>)}
         </div>
 
@@ -647,29 +674,6 @@ export default function App() {
               return <div key={status}><div className="sl">{lbl}</div><div className="mgrid">{g.map(m=><MatchCard key={m.id} m={m}/>)}</div></div>;
             })}
             {!loading&&filtered.length===0&&<div className="empty"><div className="eico">{tab==="favorites"?"⭐":"⚽"}</div><div>{tab==="favorites"?"No favourites yet — tap ☆ on a match or a team.":"No matches found."}</div></div>}
-          </>
-        )}
-
-        {/* TIPPING */}
-        {tab==="tipping"&&(
-          <>
-            <div className="tip-summary">
-              <div className="tip-summary-title">Your Tipping Score</div>
-              <div className="tip-summary-sub">Exact score = 3pts · Correct result = 1pt</div>
-              <div className="tip-score-big">{totalPoints}</div>
-              <div className="tip-score-label">Total points</div>
-              <div className="tip-breakdown">
-                {[{n:Object.keys(tips).length,l:"Tips placed"},{n:exactCount,l:"Exact scores",c:"var(--live)"},{n:correctCount,l:"Correct results",c:"var(--accent)"},{n:matches.filter(m=>m.status==="upcoming").length,l:"To tip"}].map(s=>(
-                  <div key={s.l} className="tip-stat"><div className="tip-stat-num" style={s.c?{color:s.c}:{}}>{s.n}</div><div className="tip-stat-label">{s.l}</div></div>
-                ))}
-              </div>
-            </div>
-            {matches.filter(m=>m.status==="upcoming"&&!tips[m.id]).length>0&&(
-              <><div className="sl">Place your tips</div><div className="mgrid">{matches.filter(m=>m.status==="upcoming"&&!tips[m.id]).slice(0,20).map(m=><MatchCard key={m.id} m={m} showTip/>)}</div></>
-            )}
-            {Object.keys(tips).length>0&&(
-              <><div className="sl">Your tips</div><div className="mgrid">{matches.filter(m=>tips[m.id]!==undefined).map(m=><MatchCard key={m.id} m={m} showTip/>)}</div></>
-            )}
           </>
         )}
 
@@ -697,27 +701,12 @@ export default function App() {
           <><div className="sl">Knockout Bracket</div><Bracket matches={matches}/></>
         )}
 
+        {/* PLAYERS */}
+        {tab==="players"&&<PlayersTab matches={matches}/>}
+
         {/* TEAM STATS */}
         {tab==="teamstats"&&(
           <><div className="sl">Team Statistics</div><TeamStats matches={matches} favTeams={ftNames}/></>
-        )}
-
-        {/* ALL TEAMS */}
-        {tab==="teams"&&(
-          <>
-            <div className="filters"><div className="swrap"><span className="sico">🔍</span><input className="sinp" placeholder="Search team…" value={q} onChange={e=>setQ(e.target.value)}/></div></div>
-            {Object.keys(GROUPS_STATIC).map(g=>{
-              const show=shownTeams.filter(t=>t.group===g);if(!show.length)return null;
-              return(<div key={g}><div className="sl">Group {g}</div><div className="tgrid">
-                {show.map(t=>(<div key={t.name} className={`tcard ${ftNames.includes(t.name)?"fav":""}`}>
-                  <button className={`tcfav ${ftNames.includes(t.name)?"on":""}`} onClick={()=>toggleFT(t.name)}>{ftNames.includes(t.name)?"⭐":"☆"}</button>
-                  <div className="tcflag">{FLAGS[t.name]||"🏳️"}</div>
-                  <div className="tcname">{t.name}</div>
-                  <div className="tcgroup">Group {t.group}</div>
-                </div>))}
-              </div></div>);
-            })}
-          </>
         )}
 
         <div style={{textAlign:"center",color:"var(--muted)",fontSize:"11px",marginTop:"60px",borderTop:"1px solid var(--border)",paddingTop:"20px"}}>
