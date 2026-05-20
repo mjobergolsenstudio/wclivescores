@@ -1,5 +1,4 @@
 // src/TeamStats.jsx — Per-team statistics panel
-import { useState } from "react";
 
 const FLAGS = {
   Mexico:"🇲🇽","South Africa":"🇿🇦","South Korea":"🇰🇷",Czechia:"🇨🇿",
