@@ -1,3 +1,4 @@
+import { useState } from "react";
 // src/MatchModal.jsx — Full match detail modal
 // Shows: live score, events timeline, match stats, lineups
 
@@ -514,5 +515,3 @@ export default function MatchModal({ match, onClose }) {
   );
 }
 
-// Need useState imported in parent — export helper
-export { useState };
