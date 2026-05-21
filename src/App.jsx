@@ -5,6 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 import Bracket from "./Bracket.jsx";
 import MatchModal from "./MatchModal.jsx";
 import TeamStats from "./TeamStats.jsx";
+import SquadViewer from "./SquadViewer.jsx";
 
 // ─── STATIC DATA ──────────────────────────────────────────────────────────────
 const GROUPS_STATIC = {
@@ -568,6 +569,7 @@ export default function App() {
             {id:"tables",l:"Standings"},
             {id:"bracket",l:"🗓 Bracket"},
             {id:"teamstats",l:"Team Stats"},
+            {id:"squads",l:"👕 Squads"},
             {id:"teams",l:"All Teams"},
             {id:"favorites",l:`⭐ Favourites${favCount>0?` (${favCount})`:""}`},
           ].map(t=><button key={t.id} className={`tab ${tab===t.id?"on":""}`} onClick={()=>setTab(t.id)}>{t.l}</button>)}
@@ -653,6 +655,9 @@ export default function App() {
             })}
           </>
         )}
+
+        {/* SQUADS */}
+        {tab==="squads"&&<SquadViewer/>}
 
         {selectedMatch && <MatchModal match={selectedMatch} onClose={()=>setSelectedMatch(null)}/>}
         <div style={{textAlign:"center",color:"var(--muted)",fontSize:"11px",marginTop:"60px",borderTop:"1px solid var(--border)",paddingTop:"20px"}}>
