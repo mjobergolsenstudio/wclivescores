@@ -32,8 +32,8 @@ const TS = `
 .ts-form{display:flex;gap:4px;padding:10px 16px;align-items:center}
 .ts-form-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-right:4px}
 .ts-form-dot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
-.ts-form-w{background:rgba(0,255,136,.2);color:var(--live)}
-.ts-form-d{background:rgba(0,229,255,.15);color:var(--accent)}
+.ts-form-w{background:rgba(73,188,227,.2);color:var(--live)}
+.ts-form-d{background:rgba(73,188,227,.15);color:var(--accent)}
 .ts-form-l{background:rgba(255,80,80,.15);color:#FF8080}
 .ts-form-u{background:var(--s2);color:var(--muted)}
 .ts-matches{padding:0 16px 12px}

@@ -182,11 +182,11 @@ export default function SquadViewer() {
           <>
             {/* FILTERS */}
             <div style={{ display:"flex", gap:8, marginBottom:16, flexWrap:"wrap", alignItems:"center" }}>
-              <button onClick={()=>setGroupFilter("all")} style={{ padding:"6px 14px", borderRadius:20, border:groupFilter==="all"?"1px solid #00E5FF":"1px solid rgba(255,255,255,.1)", background:groupFilter==="all"?"rgba(0,229,255,.12)":"transparent", color:groupFilter==="all"?"#00E5FF":"#6B7FA3", cursor:"pointer", fontSize:12, fontWeight:500, fontFamily:"inherit" }}>
+              <button onClick={()=>setGroupFilter("all")} style={{ padding:"6px 14px", borderRadius:20, border:groupFilter==="all"?"1px solid #00E5FF":"1px solid rgba(255,255,255,.1)", background:groupFilter==="all"?"rgba(73,188,227,.12)":"transparent", color:groupFilter==="all"?"#00E5FF":"#6B7FA3", cursor:"pointer", fontSize:12, fontWeight:500, fontFamily:"inherit" }}>
                 All Groups
               </button>
               {"ABCDEFGHIJKL".split("").map(g => (
-                <button key={g} onClick={()=>setGroupFilter(g)} style={{ padding:"6px 12px", borderRadius:20, border:groupFilter===g?"1px solid #00E5FF":"1px solid rgba(255,255,255,.1)", background:groupFilter===g?"rgba(0,229,255,.12)":"transparent", color:groupFilter===g?"#00E5FF":"#6B7FA3", cursor:"pointer", fontSize:12, fontFamily:"inherit" }}>
+                <button key={g} onClick={()=>setGroupFilter(g)} style={{ padding:"6px 12px", borderRadius:20, border:groupFilter===g?"1px solid #00E5FF":"1px solid rgba(255,255,255,.1)", background:groupFilter===g?"rgba(73,188,227,.12)":"transparent", color:groupFilter===g?"#00E5FF":"#6B7FA3", cursor:"pointer", fontSize:12, fontFamily:"inherit" }}>
                   Grp {g}
                 </button>
               ))}
@@ -204,7 +204,7 @@ export default function SquadViewer() {
                 const hasPlayers = s?.confirmed && s?.players?.length > 0;
                 return (
                   <button key={name} onClick={()=>setSelectedTeam(name)} style={{
-                    background: isSelected ? "rgba(0,229,255,.12)" : "#0D1525",
+                    background: isSelected ? "rgba(73,188,227,.12)" : "#0D1525",
                     border: isSelected ? "2px solid #00E5FF" : "1px solid rgba(255,255,255,.07)",
                     borderRadius:12, padding:"10px 8px", cursor:"pointer",
                     display:"flex", flexDirection:"column", alignItems:"center", gap:4,
@@ -263,7 +263,7 @@ export default function SquadViewer() {
                           {byPos[pos].map(p=>{
                             const star = isStar(p.name, selectedTeam);
                             return (
-                              <div key={p.name} style={{ background:star?"rgba(255,215,0,.04)":"#0D1525", border:star?"1px solid rgba(255,215,0,.25)":"1px solid rgba(255,255,255,.07)", borderRadius:10, padding:"10px 14px", display:"flex", alignItems:"center", gap:10 }}>
+                              <div key={p.name} style={{ background:star?"rgba(244,197,66,.04)":"#0D1525", border:star?"1px solid rgba(244,197,66,.25)":"1px solid rgba(255,255,255,.07)", borderRadius:10, padding:"10px 14px", display:"flex", alignItems:"center", gap:10 }}>
                                 <div style={{ width:34, height:34, borderRadius:"50%", background:colors.home, display:"flex", alignItems:"center", justifyContent:"center", fontSize:12, fontWeight:700, color:colors.text, border:star?"2px solid #FFD700":"1px solid rgba(255,255,255,.2)", flexShrink:0 }}>
                                   {p.no || "?"}
                                 </div>
@@ -298,7 +298,7 @@ export default function SquadViewer() {
                             const star = isStar(p.name, selectedTeam);
                             return (
                               <div key={i} style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:3, minWidth:56 }} title={`${p.name} · ${p.club}`}>
-                                <div style={{ width:star?42:36, height:star?42:36, borderRadius:"50%", background:colors.home, border:star?"3px solid #FFD700":"2px solid rgba(255,255,255,.25)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:11, fontWeight:700, color:colors.text, boxShadow:star?"0 0 12px rgba(255,215,0,.4)":"0 2px 6px rgba(0,0,0,.4)", position:"relative" }}>
+                                <div style={{ width:star?42:36, height:star?42:36, borderRadius:"50%", background:colors.home, border:star?"3px solid #FFD700":"2px solid rgba(255,255,255,.25)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:11, fontWeight:700, color:colors.text, boxShadow:star?"0 0 12px rgba(244,197,66,.4)":"0 2px 6px rgba(0,0,0,.4)", position:"relative" }}>
                                   {p.no||"?"}
                                   {star&&<div style={{ position:"absolute", top:-6, right:-4, fontSize:10 }}>⭐</div>}
                                 </div>

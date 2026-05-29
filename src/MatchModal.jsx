@@ -193,7 +193,7 @@ const MS = `
 .lineup-row{display:flex;justify-content:space-around;align-items:center;padding:4px 0}
 .lineup-player{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:56px}
 .lineup-jersey{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff}
-.home-jersey{background:rgba(0,229,255,.3);border:1px solid rgba(0,229,255,.5)}
+.home-jersey{background:rgba(73,188,227,.3);border:1px solid rgba(73,188,227,.5)}
 .away-jersey{background:rgba(255,107,157,.3);border:1px solid rgba(255,107,157,.5)}
 .lineup-pname{font-size:9px;color:rgba(255,255,255,.7);text-align:center;max-width:52px;line-height:1.2;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .lineup-formation{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:2px;text-align:center}
@@ -210,7 +210,7 @@ const MS = `
 .comm-item:hover{background:rgba(255,255,255,.02)}
 .comm-min{font-family:var(--fd);font-size:13px;color:var(--accent);min-width:32px;letter-spacing:1px}
 .comm-text{font-size:13px;color:var(--text);line-height:1.5}
-.comm-item.goal{background:rgba(0,255,136,.04)}
+.comm-item.goal{background:rgba(73,188,227,.04)}
 .comm-item.goal .comm-text{color:var(--live);font-weight:600}
 .comm-item.red{background:rgba(255,80,80,.04)}
 .comm-item.card .comm-text{color:var(--text)}

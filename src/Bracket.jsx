@@ -71,23 +71,23 @@ const FINAL_STRUCTURE = [
 
 const BS = `
 .bracket-wrap{overflow-x:auto;padding-bottom:16px}
-.bracket-info{background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.15);border-radius:10px;padding:12px 16px;margin-bottom:20px;font-size:12px;color:var(--muted)}
+.bracket-info{background:rgba(73,188,227,.06);border:1px solid rgba(73,188,227,.15);border-radius:10px;padding:12px 16px;margin-bottom:20px;font-size:12px;color:var(--muted)}
 .bracket-grid{display:flex;gap:0;min-width:900px}
 .bracket-round{display:flex;flex-direction:column;flex:1;min-width:160px}
 .bracket-round-title{font-family:var(--fd);font-size:13px;letter-spacing:2px;color:var(--accent);text-align:center;padding:0 8px 12px;text-transform:uppercase}
 .bracket-slots{display:flex;flex-direction:column;justify-content:space-around;flex:1;gap:8px;padding:0 4px}
 .bracket-match{background:var(--s1);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .2s}
-.bracket-match:hover{border-color:rgba(0,229,255,.3)}
+.bracket-match:hover{border-color:rgba(73,188,227,.3)}
 .bracket-match-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);padding:5px 8px 3px;background:var(--s2)}
 .bracket-team{display:flex;align-items:center;gap:6px;padding:6px 8px;font-size:12px;font-weight:500;border-bottom:1px solid var(--border)}
 .bracket-team:last-child{border-bottom:none}
-.bracket-team.winner{background:rgba(0,229,255,.06);color:#fff;font-weight:600}
+.bracket-team.winner{background:rgba(73,188,227,.06);color:#fff;font-weight:600}
 .bracket-team.tbd{color:var(--muted);font-style:italic}
 .bracket-score{margin-left:auto;font-family:var(--fd);font-size:14px;color:var(--muted)}
 .bracket-score.win{color:#fff}
 .bracket-flag{font-size:14px}
 .bracket-date{font-size:9px;color:var(--muted);padding:2px 8px 4px;background:var(--s2);text-align:right}
-.final-match .bracket-match{border-color:rgba(255,215,0,.3);background:linear-gradient(135deg,var(--s1),rgba(255,215,0,.04))}
+.final-match .bracket-match{border-color:rgba(244,197,66,.3);background:linear-gradient(135deg,var(--s1),rgba(244,197,66,.04))}
 .final-match .bracket-match-label{color:var(--gold)}
 `;
 
