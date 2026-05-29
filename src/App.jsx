@@ -496,9 +496,10 @@ export default function App(){
     {/* TICKER */}
     <div style={{position:"sticky",top:0,zIndex:30}}>
       <Ticker matches={matches}/>
+    </div>
 
-      {/* HEADER */}
-      <div className="hdr">
+    {/* HEADER */}
+    <div className="hdr" style={{position:"sticky",top:34,zIndex:25}}>
         <div className="logo">WC<span>2026</span> ⚽</div>
         <div className="hdr-mid">
           {liveN>0?<div className="live-pill"><div className="lpd"/>{liveN} Live</div>
@@ -508,10 +509,10 @@ export default function App(){
           <div className="fav-btn-h" onClick={()=>setTab("favorites")} style={{cursor:"pointer"}}>⭐{favN>0&&<div className="fav-badge">{favN}</div>}</div>
           <button className="tip-hbtn" onClick={()=>setTab("tipping")}>🏆 <span>Tipping{totalPts>0?` · ${totalPts}pts`:""}</span></button>
         </div>
-      </div>
+    </div>
 
-      {/* NAV ROW 1 */}
-      <div className="nav">
+    {/* NAV */}
+    <div className="nav" style={{position:"sticky",top:88,zIndex:20}}>
         <div className="nr1">
           {[{id:"matches",l:"Matches"},{id:"tables",l:"Standings"},{id:"bracket",l:"Bracket"},{id:"squads",l:"Squads"},{id:"teams",l:"Teams"},{id:"teamstats",l:"Stats"},{id:"favorites",l:"Favourites"}].map(t=>(
             <button key={t.id} className={`nt${tab===t.id?" on":""}`} onClick={()=>setTab(t.id)}>{t.l}</button>
@@ -533,7 +534,6 @@ export default function App(){
             )}
           </div>
         )}
-      </div>
     </div>
 
     <div className="app">
