@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Which World Cup 2026 Nation Are You? | FIFA WC Quiz</title>
+<meta name="description" content="Take our viral FIFA World Cup 2026 personality quiz and discover which of the 48 nations matches your vibe. Share your result!">
+<meta property="og:title" content="Which World Cup 2026 Nation Are You?">
+<meta property="og:description" content="10 questions to reveal your inner football nation. Are you Brazil's flair or Germany's precision?">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #FFD700;
+    --green: #00C853;
+    --red: #e63946;
+    --bg: #0d0d1a;
+    --card: #141428;
+    --border: rgba(255,255,255,0.08);
+  }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 20%, rgba(0,200,83,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 80%, rgba(255,215,0,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 50% 50%, rgba(230,57,70,0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 40px 0 32px;
+  }
+
+  .ball {
+    font-size: 56px;
+    display: block;
+    margin-bottom: 12px;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 8vw, 56px);
+    letter-spacing: 2px;
+    line-height: 1.05;
+    background: linear-gradient(135deg, #fff 0%, #FFD700 50%, #FFA500 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+  }
+
+  .header p {
+    color: #999;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* Progress */
+  .progress-wrap {
+    margin-bottom: 28px;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 8px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .progress-bar {
+    height: 6px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), var(--gold));
+    border-radius: 99px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Question card */
+  .question-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 24px;
+    margin-bottom: 16px;
+    animation: slideIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .q-number {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .q-text {
+    font-size: clamp(17px, 4vw, 21px);
+    font-weight: 800;
+    line-height: 1.35;
+    color: #fff;
+  }
+
+  /* Options */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .option {
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid rgba(255,255,255,0.09);
+    border-radius: 14px;
+    padding: 16px 20px;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #ddd;
+    text-align: left;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .option:hover {
+    background: rgba(255,215,0,0.08);
+    border-color: rgba(255,215,0,0.35);
+    color: #fff;
+    transform: translateX(4px);
+  }
+
+  .option .emoji {
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  /* Result */
+  .result-card {
+    background: var(--card);
+    border: 1px solid rgba(255,215,0,0.2);
+    border-radius: 24px;
+    padding: 36px 24px;
+    text-align: center;
+    animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .result-flag {
+    font-size: 80px;
+    display: block;
+    margin-bottom: 12px;
+    animation: flagWave 0.6s ease-out 0.3s both;
+  }
+
+  @keyframes flagWave {
+    from { transform: scale(0) rotate(-10deg); }
+    to { transform: scale(1) rotate(0); }
+  }
+
+  .result-youare {
+    font-size: 13px;
+    font-weight: 800;
+    color: #666;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .result-nation {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 10vw, 60px);
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, var(--gold), #FFA500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 16px;
+    line-height: 1;
+  }
+
+  .result-desc {
+    font-size: 15px;
+    color: #bbb;
+    line-height: 1.6;
+    font-weight: 600;
+    margin-bottom: 28px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .result-traits {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  .trait {
+    background: rgba(255,215,0,0.1);
+    border: 1px solid rgba(255,215,0,0.2);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .share-section {
+    margin-bottom: 20px;
+  }
+
+  .share-text {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 14px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    border: none;
+    transition: all 0.18s;
+    margin: 5px;
+  }
+
+  .share-btn.twitter {
+    background: #1DA1F2;
+    color: #fff;
+  }
+
+  .share-btn.copy {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .share-btn:hover { transform: scale(1.04); filter: brightness(1.1); }
+
+  .retry-btn {
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    color: #888;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.18s;
+    margin-top: 8px;
+  }
+
+  .retry-btn:hover { border-color: rgba(255,255,255,0.3); color: #ccc; }
+
+  /* Start screen */
+  .start-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 36px 24px;
+    text-align: center;
+  }
+
+  .start-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--green), #00a844);
+    color: #fff;
+    border: none;
+    border-radius: 16px;
+    padding: 18px 40px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .start-btn:hover { transform: scale(1.04); filter: brightness(1.1); }
+
+  .fun-facts {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+
+  .fun-fact {
+    font-size: 13px;
+    color: #555;
+    font-weight: 700;
+  }
+
+  .copied-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #00C853;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  .copied-toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <span class="ball">⚽</span>
+    <h1>Which World Cup<br>Nation Are You?</h1>
+    <p>10 questions · FIFA World Cup 2026 · 48 nations</p>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<div class="copied-toast" id="toast">✅ Copied to clipboard!</div>
+
+<script>
+const QUESTIONS = [
+  {
+    q: "It's Saturday night. What's your vibe?",
+    opts: [
+      { e: "💃", t: "Dancing until sunrise — life is a party", tags: { brazil: 3, spain: 2, mexico: 1 } },
+      { e: "📚", t: "Prepping for next week — always a step ahead", tags: { germany: 3, england: 2, japan: 1 } },
+      { e: "🍕", t: "Hosting friends with amazing food and wine", tags: { france: 2, italy: 3, argentina: 1 } },
+      { e: "🎯", t: "Solo flow — focused on your own thing", tags: { usa: 2, portugal: 1, netherlands: 2 } },
+    ]
+  },
+  {
+    q: "How do you handle a crisis?",
+    opts: [
+      { e: "🔥", t: "Attack it head-on. Chaos is my playground.", tags: { brazil: 2, argentina: 3, portugal: 1 } },
+      { e: "📋", t: "Make a plan. Execute the plan. Win.", tags: { germany: 3, england: 2, japan: 2 } },
+      { e: "🤝", t: "Rally the team and sort it together", tags: { france: 3, spain: 2, usa: 1 } },
+      { e: "🧘", t: "Stay calm, adapt, trust the process", tags: { japan: 3, south_korea: 2, morocco: 1 } },
+    ]
+  },
+  {
+    q: "Pick your football philosophy:",
+    opts: [
+      { e: "✨", t: "Beautiful, creative, flair-first football", tags: { brazil: 3, spain: 2, portugal: 2 } },
+      { e: "⚙️", t: "Tactical precision — every player knows their role", tags: { germany: 3, italy: 2, netherlands: 2 } },
+      { e: "❤️", t: "Heart and passion above everything", tags: { argentina: 3, mexico: 2, morocco: 2 } },
+      { e: "🚀", t: "Direct, fast, physical — let's get it done", tags: { england: 3, usa: 2, australia: 2 } },
+    ]
+  },
+  {
+    q: "Your ideal holiday destination?",
+    opts: [
+      { e: "🏖️", t: "Tropical beach with music and colour", tags: { brazil: 3, mexico: 2, senegal: 1 } },
+      { e: "🏔️", t: "Mountain trek — challenge and panorama", tags: { switzerland: 2, germany: 1, colombia: 2 } },
+      { e: "🏙️", t: "Buzzing metropolis — culture, food, nightlife", tags: { france: 3, spain: 2, japan: 2 } },
+      { e: "🏜️", t: "Desert or open plains — raw, untamed", tags: { morocco: 3, senegal: 2, usa: 1 } },
+    ]
+  },
+  {
+    q: "Your superpower in a team?",
+    opts: [
+      { e: "🎨", t: "Creativity — I come up with the unexpected idea", tags: { brazil: 2, portugal: 3, spain: 2 } },
+      { e: "🛡️", t: "Reliability — I never let the team down", tags: { germany: 3, england: 2, japan: 3 } },
+      { e: "🗣️", t: "Leadership — I lift everyone around me", tags: { argentina: 3, france: 2, usa: 2 } },
+      { e: "⚡", t: "Energy — I bring the intensity every time", tags: { mexico: 3, south_korea: 2, australia: 2 } },
+    ]
+  },
+  {
+    q: "How do you celebrate a big win?",
+    opts: [
+      { e: "🕺", t: "Wild dancing and singing — maximum joy", tags: { brazil: 3, mexico: 3, senegal: 2 } },
+      { e: "🍾", t: "Elegant dinner with the people I love most", tags: { france: 3, italy: 2, spain: 1 } },
+      { e: "🏆", t: "Hoist the trophy and soak it all in", tags: { argentina: 3, germany: 2, portugal: 2 } },
+      { e: "🔮", t: "Start planning the next challenge immediately", tags: { england: 2, usa: 2, netherlands: 2 } },
+    ]
+  },
+  {
+    q: "What's your fashion sense?",
+    opts: [
+      { e: "🌈", t: "Colourful, bold, loud — you'll notice me", tags: { brazil: 3, mexico: 2, senegal: 2 } },
+      { e: "🖤", t: "Minimalist and sleek — less is more", tags: { germany: 2, netherlands: 3, japan: 2 } },
+      { e: "👑", t: "Classic with a touch of luxury", tags: { france: 3, spain: 2, portugal: 2 } },
+      { e: "🤠", t: "Comfortable and practical — function over form", tags: { usa: 3, australia: 3, england: 1 } },
+    ]
+  },
+  {
+    q: "How do you feel about underdogs?",
+    opts: [
+      { e: "🙌", t: "I AM the underdog — and I love it", tags: { morocco: 3, south_korea: 3, senegal: 2 } },
+      { e: "🦁", t: "I expect to win. Always.", tags: { brazil: 2, argentina: 3, germany: 2 } },
+      { e: "😎", t: "I root for the underdog while quietly preparing to dominate", tags: { spain: 2, france: 3, portugal: 2 } },
+      { e: "🤝", t: "Every game is equal — it's about the day", tags: { japan: 3, england: 2, usa: 2 } },
+    ]
+  },
+  {
+    q: "Pick a movie genre:",
+    opts: [
+      { e: "🎭", t: "Epic drama with passion and heartbreak", tags: { argentina: 3, italy: 3, portugal: 2 } },
+      { e: "🕵️", t: "Thriller — cerebral, tactical, intense", tags: { germany: 3, spain: 2, netherlands: 2 } },
+      { e: "🎉", t: "Comedy — life's too short not to laugh", tags: { brazil: 3, mexico: 2, australia: 2 } },
+      { e: "🚀", t: "Action blockbuster — explosions, energy, pace", tags: { usa: 3, england: 2, france: 1 } },
+    ]
+  },
+  {
+    q: "Final question: your football legacy would be...",
+    opts: [
+      { e: "🌟", t: "The most entertaining team the world ever saw", tags: { brazil: 3, spain: 2, portugal: 2 } },
+      { e: "🏅", t: "Multiple titles through sheer consistency", tags: { germany: 3, france: 2, argentina: 2 } },
+      { e: "💥", t: "One perfect tournament that nobody forgets", tags: { south_korea: 3, morocco: 3, argentina: 1 } },
+      { e: "🌍", t: "Inspiring an entire generation and continent", tags: { senegal: 3, morocco: 2, usa: 2 } },
+    ]
+  },
+];
+
+const NATIONS = {
+  brazil:      { name: "Brazil", flag: "🇧🇷", desc: "You live for passion, creativity, and joy. You make everything look effortless — and you're always the life of the party.", traits: ["Creative", "Passionate", "Magnetic"] },
+  germany:     { name: "Germany", flag: "🇩🇪", desc: "Disciplined, efficient, unstoppable. You show up prepared every single time and you deliver when it counts most.", traits: ["Reliable", "Tactical", "Precise"] },
+  argentina:   { name: "Argentina", flag: "🇦🇷", desc: "Emotional, dramatic, brilliant. You carry the weight of expectation and turn it into pure gold when the moment arrives.", traits: ["Leader", "Intense", "Legendary"] },
+  france:      { name: "France", flag: "🇫🇷", desc: "Elegant, sophisticated, and deceptively dangerous. You combine style and substance like nobody else.", traits: ["Refined", "Smart", "Adaptable"] },
+  spain:       { name: "Spain", flag: "🇪🇸", desc: "Patient, artistic, and methodical. You control the tempo of everything — life is a game of possession.", traits: ["Artistic", "Patient", "Technical"] },
+  portugal:    { name: "Portugal", flag: "🇵🇹", desc: "Individual brilliance wrapped in team ambition. One moment of magic from you can change everything.", traits: ["Brilliant", "Flair", "Driven"] },
+  england:     { name: "England", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", desc: "Passionate, energetic, and eternally optimistic. You believe deeply — and you're building toward something historic.", traits: ["Energetic", "Hopeful", "Passionate"] },
+  japan:       { name: "Japan", flag: "🇯🇵", desc: "Disciplined, humble, and quietly lethal. People underestimate you — and that's exactly how you like it.", traits: ["Disciplined", "Precise", "Determined"] },
+  morocco:     { name: "Morocco", flag: "🇲🇦", desc: "The ultimate underdog story. You defy expectations with heart, organisation, and a burning desire to make history.", traits: ["Resilient", "United", "Historic"] },
+  usa:         { name: "USA", flag: "🇺🇸", desc: "Bold, ambitious, and always improving. You bring raw energy and you're not afraid to dream big.", traits: ["Bold", "Athletic", "Ambitious"] },
+  mexico:      { name: "Mexico", flag: "🇲🇽", desc: "Festive, passionate, and never boring. You bring the most electric atmosphere wherever you go.", traits: ["Electric", "Passionate", "Fun"] },
+  south_korea: { name: "South Korea", flag: "🇰🇷", desc: "High energy, disciplined, and capable of miracle runs. You surprise everyone with your intensity and never give up.", traits: ["Intense", "Never-give-up", "Surprising"] },
+  netherlands: { name: "Netherlands", flag: "🇳🇱", desc: "Total football, total thinker. You see the big picture and execute with precision and intelligence.", traits: ["Intelligent", "Versatile", "Principled"] },
+  senegal:     { name: "Senegal", flag: "🇸🇳", desc: "Raw talent, unity, and continental pride. You play with a freedom and joy that is simply infectious.", traits: ["Joyful", "United", "Explosive"] },
+  italy:       { name: "Italy", flag: "🇮🇹", desc: "Stylish, tactical, and historically magnificent. You know how to win the moments that matter most.", traits: ["Stylish", "Tactical", "Winner"] },
+  australia:   { name: "Australia", flag: "🇦🇺", desc: "Fearless and down-to-earth. You never back down from a challenge and you do it with a smile.", traits: ["Fearless", "Spirited", "Grounded"] },
+  colombia:    { name: "Colombia", flag: "🇨🇴", desc: "Expressive, talented, and magnetic. Your style of football is pure entertainment.", traits: ["Expressive", "Talented", "Entertaining"] },
+  switzerland: { name: "Switzerland", flag: "🇨🇭", desc: "Solid, reliable, and full of surprises. You're always better than people expect.", traits: ["Solid", "Composed", "Underrated"] },
+};
+
+let currentQ = -1; // -1 = start screen
+let scores = {};
+let answered = 0;
+
+function getTopNation() {
+  let top = null, max = -1;
+  for (const [k, v] of Object.entries(scores)) {
+    if (v > max) { max = v; top = k; }
+  }
+  return top || "brazil";
+}
+
+function applyTags(tags) {
+  for (const [nation, pts] of Object.entries(tags)) {
+    scores[nation] = (scores[nation] || 0) + pts;
+  }
+}
+
+function render() {
+  const app = document.getElementById("app");
+
+  if (currentQ === -1) {
+    app.innerHTML = `
+      <div class="start-card">
+        <p style="font-size:15px; color:#aaa; font-weight:600; margin-bottom:20px; line-height:1.6">
+          The FIFA World Cup 2026 kicks off June 11 with <strong style="color:#FFD700">48 nations</strong> competing across the USA, Canada & Mexico.<br><br>
+          Answer 10 questions and find out which country matches your soul.
+        </p>
+        <button class="start-btn" onclick="startQuiz()">
+          ⚽ Start the Quiz
+        </button>
+        <div class="fun-facts">
+          <span class="fun-fact">🕐 2 minutes</span>
+          <span class="fun-fact">📊 10 questions</span>
+          <span class="fun-fact">🌍 18 possible nations</span>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  if (currentQ >= QUESTIONS.length) {
+    const nation = getTopNation();
+    const n = NATIONS[nation];
+    const shareText = `I just took the FIFA World Cup 2026 quiz and I'm ${n.flag} ${n.name}! Which nation are you? ⚽`;
+    const shareUrl = window.location.href;
+
+    app.innerHTML = `
+      <div class="result-card">
+        <span class="result-flag">${n.flag}</span>
+        <p class="result-youare">You Are</p>
+        <div class="result-nation">${n.name}</div>
+        <p class="result-desc">${n.desc}</p>
+        <div class="result-traits">
+          ${n.traits.map(t => `<span class="trait">${t}</span>`).join("")}
+        </div>
+        <div class="share-section">
+          <p class="share-text">Share your result</p>
+          <button class="share-btn twitter" onclick="shareTwitter('${shareText.replace(/'/g,"\\'")}', '${shareUrl}')">
+            𝕏 Share on X
+          </button>
+          <button class="share-btn copy" onclick="copyResult('${shareText.replace(/'/g,"\\'")}')">
+            📋 Copy
+          </button>
+        </div>
+        <button class="retry-btn" onclick="restartQuiz()">🔄 Try again</button>
+      </div>
+      <p style="text-align:center; margin-top:20px; color:#444; font-size:13px; font-weight:700">
+        ⚽ FIFA World Cup 2026 starts June 11 — <a href="/" style="color:#FFD700; text-decoration:none">track live scores →</a>
+      </p>
+    `;
+    return;
+  }
+
+  const q = QUESTIONS[currentQ];
+  const pct = Math.round((currentQ / QUESTIONS.length) * 100);
+
+  app.innerHTML = `
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span>Question ${currentQ + 1} of ${QUESTIONS.length}</span>
+        <span>${pct}%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:${pct}%"></div>
+      </div>
+    </div>
+    <div class="question-card">
+      <p class="q-number">Question ${currentQ + 1}</p>
+      <p class="q-text">${q.q}</p>
+    </div>
+    <div class="options">
+      ${q.opts.map((opt, i) => `
+        <button class="option" onclick="answer(${i})">
+          <span class="emoji">${opt.e}</span>
+          <span>${opt.t}</span>
+        </button>
+      `).join("")}
+    </div>
+  `;
+}
+
+function startQuiz() {
+  currentQ = 0;
+  scores = {};
+  render();
+}
+
+function answer(i) {
+  const tags = QUESTIONS[currentQ].opts[i].tags;
+  applyTags(tags);
+  currentQ++;
+  render();
+}
+
+function restartQuiz() {
+  currentQ = -1;
+  scores = {};
+  render();
+}
+
+function shareTwitter(text, url) {
+  const encoded = encodeURIComponent(text + " " + url);
+  window.open(`https://twitter.com/intent/tweet?text=${encoded}`, "_blank");
+}
+
+function copyResult(text) {
+  navigator.clipboard.writeText(text + " " + window.location.href).then(() => {
+    const t = document.getElementById("toast");
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 2500);
+  });
+}
+
+render();
+</script>
+</body>
+</html>
