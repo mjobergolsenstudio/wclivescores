@@ -6,6 +6,7 @@ import Bracket from "./Bracket.jsx";
 import TeamStats from "./TeamStats.jsx";
 import SquadViewer from "./SquadViewer.jsx";
 import MatchModal from "./MatchModal.jsx";
+import NationQuiz from "./NationQuiz.jsx";
 
 const GROUPS = {
   A:["Mexico","South Africa","South Korea","Czechia"],
@@ -514,7 +515,16 @@ export default function App(){
     {/* NAV */}
     <div className="nav" style={{position:"sticky",top:88,zIndex:20}}>
         <div className="nr1">
-          {[{id:"matches",l:"Matches"},{id:"tables",l:"Standings"},{id:"bracket",l:"Bracket"},{id:"squads",l:"Squads"},{id:"teams",l:"Teams"},{id:"teamstats",l:"Stats"},{id:"favorites",l:"Favourites"}].map(t=>(
+          {[
+            {id:"matches",l:"Matches"},
+            {id:"tables",l:"Standings"},
+            {id:"bracket",l:"Bracket"},
+            {id:"squads",l:"Squads"},
+            {id:"teams",l:"Teams"},
+            {id:"teamstats",l:"Stats"},
+            {id:"favorites",l:"Favourites"},
+            {id:"quiz",l:"🌍 Quiz"},
+          ].map(t=>(
             <button key={t.id} className={`nt${tab===t.id?" on":""}`} onClick={()=>setTab(t.id)}>{t.l}</button>
           ))}
         </div>
@@ -599,6 +609,9 @@ export default function App(){
       {tab==="bracket"&&<><div className="sl">Knockout Bracket</div><Bracket matches={matches}/></>}
       {tab==="squads"&&<><div className="sl">Official Squads</div><SquadViewer/></>}
       {tab==="teamstats"&&<><div className="sl">Team Statistics</div><TeamStats matches={matches} favTeams={ftNames}/></>}
+
+      {/* QUIZ */}
+      {tab==="quiz"&&<NationQuiz/>}
 
       {/* ALL TEAMS */}
       {tab==="teams"&&(<>
