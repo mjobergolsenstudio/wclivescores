@@ -623,7 +623,7 @@ export default function App(){
         </>
       )}
 
-      {tab==="bracket"&&<><div className="sl">Knockout Bracket</div><Bracket matches={matches}/>}
+      {tab==="bracket"&&<><div className="sl">Knockout Bracket</div><Bracket matches={matches}/></>}
       {tab==="squads"&&<><div className="sl">Official Squads</div><SquadViewer/></>}
       {tab==="teamstats"&&<><div className="sl">Team Statistics</div><TeamStats matches={matches} favTeams={ftNames}/></>}
 
