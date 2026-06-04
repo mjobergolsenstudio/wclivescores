@@ -596,7 +596,34 @@ export default function App(){
         <div className="gtables">{gkeys.filter(g=>gf==="all"||gf===g).map(g=><GT key={g} group={g}/>)}</div>
       </>)}
 
-      {tab==="bracket"&&<><div className="sl">Knockout Bracket</div><Bracket matches={matches}/></>}
+      {tab==="blog"&&(
+        <>
+          <div className="sl">Blog</div>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:12}}>
+            {[
+              {title:"World Cup 2026 Injury Tracker",desc:"Alisson, Estevao, De Ligt — who is out and who made it back in time.",url:"/blog/world-cup-2026-injury-tracker.html",tag:"Injuries"},
+              {title:"New Rules: VAR, Red Cards and More",desc:"IFAB confirms biggest rule changes in years — all explained.",url:"/blog/world-cup-2026-new-rules.html",tag:"Rules"},
+              {title:"Messi and Ronaldo — The Final Chapter",desc:"Their sixth and last World Cup. The end of footballs greatest era.",url:"/blog/messi-ronaldo-last-world-cup-2026.html",tag:"Stories"},
+              {title:"Tipping Guide — How to Win",desc:"Strategies, best exact scores and upsets to back across 104 matches.",url:"/blog/world-cup-2026-tipping-guide.html",tag:"Tipping"},
+              {title:"Full Schedule — All 104 Matches",desc:"Every kickoff time and venue for the 2026 World Cup.",url:"/blog/world-cup-2026-schedule.html",tag:"Schedule"},
+              {title:"Norway at World Cup 2026",desc:"Group I guide — Haaland, Odegaard and Norways chances.",url:"/blog/norway-world-cup-2026.html",tag:"Norway"},
+              {title:"Who Will Win World Cup 2026?",desc:"Our round-by-round predictions and tournament winner pick.",url:"/blog/world-cup-2026-predictions.html",tag:"Predictions"},
+              {title:"Top 10 Teams — Latest Squad News",desc:"France, Brazil, England — injury updates and form.",url:"/blog/world-cup-2026-team-news.html",tag:"News"},
+              {title:"Dark Horses — 7 Underdogs to Watch",desc:"Japan, Norway, Uruguay and the teams that could shock everyone.",url:"/blog/world-cup-2026-dark-horses.html",tag:"Dark Horses"},
+            ].map((a,i)=>(
+              <a key={i} href={a.url}
+                style={{background:"rgba(255,255,255,0.04)",border:"1.5px solid rgba(255,255,255,0.07)",borderRadius:12,padding:16,textDecoration:"none",display:"flex",flexDirection:"column",gap:8,transition:"border-color .2s,transform .2s"}}>
+                <div style={{fontFamily:"var(--fo)",fontSize:9,letterSpacing:2,color:"var(--sec)",textTransform:"uppercase"}}>{a.tag}</div>
+                <div style={{fontSize:15,fontWeight:700,color:"#fff",lineHeight:1.3}}>{a.title}</div>
+                <div style={{fontSize:12,color:"var(--muted)",lineHeight:1.5}}>{a.desc}</div>
+                <div style={{fontFamily:"var(--fo)",fontSize:8,color:"var(--sec)",letterSpacing:1,marginTop:4}}>READ ARTICLE</div>
+              </a>
+            ))}
+          </div>
+        </>
+      )}
+
+      {tab==="bracket"&&<><div className="sl">Knockout Bracket</div><Bracket matches={matches}/>}
       {tab==="squads"&&<><div className="sl">Official Squads</div><SquadViewer/></>}
       {tab==="teamstats"&&<><div className="sl">Team Statistics</div><TeamStats matches={matches} favTeams={ftNames}/></>}
 
