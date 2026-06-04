@@ -9,6 +9,7 @@
   ],
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api/:path*" },
-    { "source": "/((?!blog/).*)", "destination": "/" }
+    { "source": "/blog/:path*", "destination": "/blog/:path*" },
+    { "source": "/((?!blog|api).*)", "destination": "/" }
   ]
 }
