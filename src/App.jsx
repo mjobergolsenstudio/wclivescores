@@ -392,13 +392,23 @@ export default function App(){
   const[draft,setDraft]=useState({});
 
   const fetch_=useCallback(async()=>{
-    if(!isLive()){setMatches(simMatches());setIsSim(true);setLoading(false);return;}
-    try{const r=await fetch("/api/matches");if(!r.ok)throw new Error();const d=await r.json();if(d.error)throw new Error();setMatches(d.matches||[]);setIsSim(false);setError(null);setLastUp(new Date());}
-    catch{setError("Could not load live data.");setMatches(simMatches());setIsSim(true);}
-    finally{setLoading(false);}
+    try{
+      const r=await fetch("/api/matches");
+      if(!r.ok)throw new Error(`HTTP ${r.status}`);
+      const d=await r.json();
+      if(d.error)throw new Error(d.error);
+      const ms=d.matches||[];
+      if(ms.length>0){setMatches(ms);setIsSim(false);setError(null);setLastUp(new Date());}
+      else throw new Error("No matches from API");
+    }catch(err){
+      console.error(err);
+      setError("Could not load live data — showing simulated scores.");
+      setMatches(simMatches());
+      setIsSim(true);
+    }finally{setLoading(false);}
   },[]);
 
-  useEffect(()=>{fetch_();const t=setInterval(fetch_,isLive()?60000:5*60*1000);const c=setInterval(()=>setNow(getNow()),30000);return()=>{clearInterval(t);clearInterval(c);};},[fetch_]);
+  useEffect(()=>{fetch_();const t=setInterval(fetch_,60000);const c=setInterval(()=>setNow(getNow()),30000);return()=>{clearInterval(t);clearInterval(c);};},[fetch_]);
   useEffect(()=>{if("Notification"in window)setNotif(Notification.permission==="granted");},[]);
   useEffect(()=>{try{localStorage.setItem("wc_fm",JSON.stringify(fmIds));}catch{}},[fmIds]);
   useEffect(()=>{try{localStorage.setItem("wc_ft",JSON.stringify(ftNames));}catch{}},[ftNames]);
