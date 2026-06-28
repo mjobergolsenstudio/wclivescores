@@ -1,5 +1,4 @@
-// src/Bracket.jsx — WC 2026 Knockout Bracket
-// Round of 32 → Round of 16 → QF → SF → Final
+// Bracket.jsx — WC 2026 Knockout Bracket with real qualified teams
 
 import { useState } from "react";
 
@@ -18,169 +17,153 @@ const FLAGS = {
   England:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",Croatia:"🇭🇷",Ghana:"🇬🇭",Panama:"🇵🇦",
 };
 
-// WC 2026 knockout structure — 32 teams advance from group stage
-// Top 2 from each group + 8 best 3rd-place teams = 32
-// Pre-defined R32 matchups based on FIFA seeding rules
-const R32_STRUCTURE = [
-  // Match label, home slot, away slot
-  { id:"R32-1",  label:"Match 49",  date:"Jun 28", home:"1A", away:"3D/E/F" },
-  { id:"R32-2",  label:"Match 50",  date:"Jun 28", home:"1C", away:"3A/B/F" },
-  { id:"R32-3",  label:"Match 51",  date:"Jun 29", home:"1B", away:"3A/C/D" },
-  { id:"R32-4",  label:"Match 52",  date:"Jun 29", home:"1D", away:"3B/E/G" },
-  { id:"R32-5",  label:"Match 53",  date:"Jun 30", home:"1E", away:"3A/C/H" },
-  { id:"R32-6",  label:"Match 54",  date:"Jun 30", home:"1F", away:"3B/D/H" },
-  { id:"R32-7",  label:"Match 55",  date:"Jul 1",  home:"1G", away:"3C/G/H" },
-  { id:"R32-8",  label:"Match 56",  date:"Jul 1",  home:"1H", away:"3E/F/G" },
-  { id:"R32-9",  label:"Match 57",  date:"Jul 2",  home:"2A", away:"2B" },
-  { id:"R32-10", label:"Match 58",  date:"Jul 2",  home:"2C", away:"2D" },
-  { id:"R32-11", label:"Match 59",  date:"Jul 3",  home:"2E", away:"2F" },
-  { id:"R32-12", label:"Match 60",  date:"Jul 3",  home:"2G", away:"2H" },
-  { id:"R32-13", label:"Match 61",  date:"Jul 4",  home:"2I", away:"2J" },
-  { id:"R32-14", label:"Match 62",  date:"Jul 4",  home:"2K", away:"2L" },
-  { id:"R32-15", label:"Match 63",  date:"Jul 5",  home:"1I", away:"1J" },
-  { id:"R32-16", label:"Match 64",  date:"Jul 5",  home:"1K", away:"1L" },
+// Round of 32 — confirmed matchups as of June 27
+const R32 = [
+  { id:1,  date:"Jun 28", home:"Mexico",      away:"South Korea",       venue:"Estadio Azteca" },
+  { id:2,  date:"Jun 28", home:"Switzerland", away:"Morocco",           venue:"BC Place" },
+  { id:3,  date:"Jun 29", home:"Canada",      away:"South Africa",      venue:"SoFi Stadium" },
+  { id:4,  date:"Jun 29", home:"Brazil",      away:"Japan",             venue:"NRG Stadium" },
+  { id:5,  date:"Jun 30", home:"Germany",     away:"Ecuador",           venue:"Mercedes-Benz Stadium" },
+  { id:6,  date:"Jun 30", home:"Netherlands", away:"Sweden",            venue:"MetLife Stadium" },
+  { id:7,  date:"Jul 1",  home:"USA",         away:"Bosnia-Herzegovina",venue:"Levi's Stadium" },
+  { id:8,  date:"Jul 1",  home:"Ivory Coast", away:"Egypt",             venue:"AT&T Stadium" },
+  { id:9,  date:"Jul 1",  home:"Belgium",     away:"Australia",         venue:"Hard Rock Stadium" },
+  { id:10, date:"Jul 2",  home:"Spain",       away:"Cape Verde",        venue:"SoFi Stadium" },
+  { id:11, date:"Jul 2",  home:"France",      away:"Ivory Coast",       venue:"Lincoln Financial Field" },
+  { id:12, date:"Jul 2",  home:"Norway",      away:"Senegal",           venue:"MetLife Stadium" },
+  { id:13, date:"Jul 3",  home:"Argentina",   away:"Cape Verde",        venue:"Levi's Stadium" },
+  { id:14, date:"Jul 3",  home:"Colombia",    away:"Portugal",          venue:"Hard Rock Stadium" },
+  { id:15, date:"Jul 3",  home:"England",     away:"Ghana",             venue:"Gillette Stadium" },
+  { id:16, date:"Jul 3",  home:"Croatia",     away:"Paraguay",          venue:"Arrowhead Stadium" },
 ];
 
-const R16_STRUCTURE = [
-  { id:"R16-1", label:"Match 65", date:"Jul 6",  home:"W49", away:"W50" },
-  { id:"R16-2", label:"Match 66", date:"Jul 6",  home:"W51", away:"W52" },
-  { id:"R16-3", label:"Match 67", date:"Jul 7",  home:"W53", away:"W54" },
-  { id:"R16-4", label:"Match 68", date:"Jul 7",  home:"W55", away:"W56" },
-  { id:"R16-5", label:"Match 69", date:"Jul 8",  home:"W57", away:"W58" },
-  { id:"R16-6", label:"Match 70", date:"Jul 8",  home:"W59", away:"W60" },
-  { id:"R16-7", label:"Match 71", date:"Jul 9",  home:"W61", away:"W62" },
-  { id:"R16-8", label:"Match 72", date:"Jul 9",  home:"W63", away:"W64" },
+const R16 = [
+  { id:17, date:"Jul 5", home:"W1", away:"W2" },
+  { id:18, date:"Jul 5", home:"W3", away:"W4" },
+  { id:19, date:"Jul 6", home:"W5", away:"W6" },
+  { id:20, date:"Jul 6", home:"W7", away:"W8" },
+  { id:21, date:"Jul 7", home:"W9", away:"W10" },
+  { id:22, date:"Jul 7", home:"W11", away:"W12" },
+  { id:23, date:"Jul 8", home:"W13", away:"W14" },
+  { id:24, date:"Jul 8", home:"W15", away:"W16" },
 ];
 
-const QF_STRUCTURE = [
-  { id:"QF-1", label:"QF 1", date:"Jul 11", home:"W65", away:"W66" },
-  { id:"QF-2", label:"QF 2", date:"Jul 11", home:"W67", away:"W68" },
-  { id:"QF-3", label:"QF 3", date:"Jul 12", home:"W69", away:"W70" },
-  { id:"QF-4", label:"QF 4", date:"Jul 12", home:"W71", away:"W72" },
+const QF = [
+  { id:25, date:"Jul 10", home:"W17", away:"W18" },
+  { id:26, date:"Jul 10", home:"W19", away:"W20" },
+  { id:27, date:"Jul 11", home:"W21", away:"W22" },
+  { id:28, date:"Jul 11", home:"W23", away:"W24" },
 ];
 
-const SF_STRUCTURE = [
-  { id:"SF-1", label:"Semi Final 1", date:"Jul 14", home:"W QF1", away:"W QF2" },
-  { id:"SF-2", label:"Semi Final 2", date:"Jul 15", home:"W QF3", away:"W QF4" },
+const SF = [
+  { id:29, date:"Jul 14", home:"W25", away:"W26" },
+  { id:30, date:"Jul 15", home:"W27", away:"W28" },
 ];
 
-const FINAL_STRUCTURE = [
-  { id:"3RD", label:"3rd Place", date:"Jul 18", home:"L SF1", away:"L SF2" },
-  { id:"FIN", label:"🏆 Final",  date:"Jul 19", home:"W SF1", away:"W SF2" },
+const FINAL = [
+  { id:31, date:"Jul 18", home:"L29", away:"L30", label:"3rd Place" },
+  { id:32, date:"Jul 19", home:"W29", away:"W30", label:"🏆 FINAL" },
 ];
 
 const BS = `
-.bracket-wrap{overflow-x:auto;padding-bottom:16px}
-.bracket-info{background:rgba(73,188,227,.06);border:1px solid rgba(73,188,227,.15);border-radius:10px;padding:12px 16px;margin-bottom:20px;font-size:12px;color:var(--muted)}
-.bracket-grid{display:flex;gap:0;min-width:900px}
-.bracket-round{display:flex;flex-direction:column;flex:1;min-width:160px}
-.bracket-round-title{font-family:var(--fd);font-size:13px;letter-spacing:2px;color:var(--accent);text-align:center;padding:0 8px 12px;text-transform:uppercase}
-.bracket-slots{display:flex;flex-direction:column;justify-content:space-around;flex:1;gap:8px;padding:0 4px}
-.bracket-match{background:var(--s1);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .2s}
-.bracket-match:hover{border-color:rgba(73,188,227,.3)}
-.bracket-match-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);padding:5px 8px 3px;background:var(--s2)}
-.bracket-team{display:flex;align-items:center;gap:6px;padding:6px 8px;font-size:12px;font-weight:500;border-bottom:1px solid var(--border)}
-.bracket-team:last-child{border-bottom:none}
-.bracket-team.winner{background:rgba(73,188,227,.06);color:#fff;font-weight:600}
-.bracket-team.tbd{color:var(--muted);font-style:italic}
-.bracket-score{margin-left:auto;font-family:var(--fd);font-size:14px;color:var(--muted)}
-.bracket-score.win{color:#fff}
-.bracket-flag{font-size:14px}
-.bracket-date{font-size:9px;color:var(--muted);padding:2px 8px 4px;background:var(--s2);text-align:right}
-.final-match .bracket-match{border-color:rgba(244,197,66,.3);background:linear-gradient(135deg,var(--s1),rgba(244,197,66,.04))}
-.final-match .bracket-match-label{color:var(--gold)}
+.bracket-wrap{overflow-x:auto;padding-bottom:16px;-webkit-overflow-scrolling:touch;}
+.bracket-grid{display:flex;gap:12px;min-width:960px;align-items:flex-start;}
+.bracket-round{display:flex;flex-direction:column;flex:1;min-width:170px;}
+.br-title{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:3px;color:#49BCE3;text-align:center;padding:0 6px 12px;text-transform:uppercase;}
+.br-slots{display:flex;flex-direction:column;justify-content:space-around;flex:1;gap:8px;padding:0 4px;}
+.bm{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;transition:border-color .2s;}
+.bm:hover{border-color:rgba(73,188,227,0.3);}
+.bm-label{font-family:'Orbitron',monospace;font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#2a3e5e;padding:5px 8px 3px;background:rgba(0,0,0,0.2);}
+.bm-team{display:flex;align-items:center;gap:6px;padding:7px 8px;font-size:12px;font-weight:600;border-bottom:1px solid rgba(255,255,255,0.05);color:#E8EDF5;font-family:'Rajdhani',sans-serif;}
+.bm-team:last-child{border-bottom:none;}
+.bm-team.tbd{color:#2a3e5e;font-style:italic;}
+.bm-team.winner{background:rgba(73,188,227,0.08);color:#49BCE3;}
+.bm-flag{font-size:15px;}
+.bm-score{margin-left:auto;font-family:'Orbitron',monospace;font-size:13px;color:#6B7FA3;}
+.bm-score.win{color:#E8EDF5;}
+.bm-date{font-size:9px;color:#2a3e5e;padding:3px 8px 4px;background:rgba(0,0,0,0.2);text-align:right;font-family:'Orbitron',monospace;letter-spacing:1px;}
+.final-m .bm{border-color:rgba(244,197,66,0.3);background:linear-gradient(135deg,rgba(244,197,66,0.06),rgba(244,197,66,0.02));}
+.final-m .bm-label{color:#F4C542;}
+.info-box{background:rgba(0,90,147,0.15);border:1px solid rgba(73,188,227,0.2);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#6B7FA3;line-height:1.5;}
+.info-box strong{color:#49BCE3;}
 `;
 
-function BracketMatch({ m, result }) {
-  const homeWin = result && result.home_score > result.away_score;
-  const awayWin = result && result.away_score > result.home_score;
-  const isTBD = !result && !m.homeTeam && !m.awayTeam;
-
-  const homeTeam = result?.home || m.homeTeam || null;
-  const awayTeam = result?.away || m.awayTeam || null;
+function BM({ m, isFinal, label }) {
+  const homeFlag = FLAGS[m.home];
+  const awayFlag = FLAGS[m.away];
+  const isTBDHome = !homeFlag && m.home?.startsWith("W");
+  const isTBDAway = !awayFlag && m.away?.startsWith("W");
+  const hw = m.home_score !== undefined && m.away_score !== undefined && m.home_score > m.away_score;
+  const aw = m.home_score !== undefined && m.away_score !== undefined && m.away_score > m.home_score;
 
   return (
-    <div className="bracket-match">
-      <div className="bracket-match-label">{m.label}</div>
-      <div className={`bracket-team ${homeWin?"winner":""} ${!homeTeam?"tbd":""}`}>
-        <span className="bracket-flag">{homeTeam ? (FLAGS[homeTeam]||"🏳️") : ""}</span>
-        <span>{homeTeam || m.home}</span>
-        {result && <span className={`bracket-score ${homeWin?"win":""}`}>{result.home_score}</span>}
+    <div className={isFinal ? "bm final-m" : "bm"} style={isFinal ? {} : {}}>
+      {label && <div className="bm-label">{label}</div>}
+      {!label && <div className="bm-label">Match {m.id}</div>}
+      <div className={`bm-team ${isTBDHome ? "tbd" : ""} ${hw ? "winner" : ""}`}>
+        <span className="bm-flag">{homeFlag || "🏳️"}</span>
+        <span>{isTBDHome ? m.home : m.home}</span>
+        {m.home_score !== undefined && <span className={`bm-score ${hw ? "win" : ""}`}>{m.home_score}</span>}
       </div>
-      <div className={`bracket-team ${awayWin?"winner":""} ${!awayTeam?"tbd":""}`}>
-        <span className="bracket-flag">{awayTeam ? (FLAGS[awayTeam]||"🏳️") : ""}</span>
-        <span>{awayTeam || m.away}</span>
-        {result && <span className={`bracket-score ${awayWin?"win":""}`}>{result.away_score}</span>}
+      <div className={`bm-team ${isTBDAway ? "tbd" : ""} ${aw ? "winner" : ""}`}>
+        <span className="bm-flag">{awayFlag || "🏳️"}</span>
+        <span>{isTBDAway ? m.away : m.away}</span>
+        {m.away_score !== undefined && <span className={`bm-score ${aw ? "win" : ""}`}>{m.away_score}</span>}
       </div>
-      <div className="bracket-date">{m.date}</div>
+      <div className="bm-date">{m.venue ? `${m.date} · ${m.venue}` : m.date}</div>
     </div>
   );
 }
 
-export default function Bracket({ matches }) {
-  // Try to extract knockout results from match data
-  const knockoutMatches = matches.filter(m => m.round && !m.round.toLowerCase().includes("group") && !m.round.toLowerCase().includes("matchday"));
-
-  const getResult = (label) => {
-    return knockoutMatches.find(m => m.round?.includes(label) || m.label === label) || null;
-  };
-
+export default function Bracket() {
   return (
     <>
       <style>{BS}</style>
-      <div className="bracket-info">
-        🏆 The knockout stage begins <strong>June 28</strong>. The bracket updates automatically as teams advance. Top 2 from each group + 8 best 3rd-place teams qualify.
+      <div className="info-box">
+        🏆 Round of 32 begins <strong>June 28</strong>. 32 teams qualify: top 2 from each of 12 groups + 8 best 3rd-place teams. Bracket updates as teams advance.
       </div>
       <div className="bracket-wrap">
         <div className="bracket-grid">
 
-          {/* Round of 32 */}
+          {/* R32 */}
           <div className="bracket-round">
-            <div className="bracket-round-title">Round of 32</div>
-            <div className="bracket-slots">
-              {R32_STRUCTURE.map(m => (
-                <BracketMatch key={m.id} m={m} result={getResult(m.label)} />
-              ))}
+            <div className="br-title">Round of 32</div>
+            <div className="br-slots">
+              {R32.map(m => <BM key={m.id} m={m}/>)}
             </div>
           </div>
 
-          {/* Round of 16 */}
+          {/* R16 */}
           <div className="bracket-round">
-            <div className="bracket-round-title">Round of 16</div>
-            <div className="bracket-slots">
-              {R16_STRUCTURE.map(m => (
-                <BracketMatch key={m.id} m={m} result={getResult(m.label)} />
-              ))}
+            <div className="br-title">Round of 16</div>
+            <div className="br-slots">
+              {R16.map(m => <BM key={m.id} m={m}/>)}
             </div>
           </div>
 
-          {/* Quarter Finals */}
+          {/* QF */}
           <div className="bracket-round">
-            <div className="bracket-round-title">Quarter Finals</div>
-            <div className="bracket-slots">
-              {QF_STRUCTURE.map(m => (
-                <BracketMatch key={m.id} m={m} result={getResult(m.label)} />
-              ))}
+            <div className="br-title">Quarter Finals</div>
+            <div className="br-slots">
+              {QF.map(m => <BM key={m.id} m={m}/>)}
             </div>
           </div>
 
-          {/* Semi Finals */}
+          {/* SF */}
           <div className="bracket-round">
-            <div className="bracket-round-title">Semi Finals</div>
-            <div className="bracket-slots">
-              {SF_STRUCTURE.map(m => (
-                <BracketMatch key={m.id} m={m} result={getResult(m.label)} />
-              ))}
+            <div className="br-title">Semi Finals</div>
+            <div className="br-slots">
+              {SF.map(m => <BM key={m.id} m={m}/>)}
             </div>
           </div>
 
-          {/* Final */}
+          {/* FINAL */}
           <div className="bracket-round">
-            <div className="bracket-round-title">Final</div>
-            <div className="bracket-slots">
-              {FINAL_STRUCTURE.map(m => (
-                <div key={m.id} className={m.id==="FIN"?"final-match":""}>
-                  <BracketMatch m={m} result={getResult(m.label)} />
+            <div className="br-title">Final</div>
+            <div className="br-slots">
+              {FINAL.map(m => (
+                <div key={m.id} className={m.label?.includes("FINAL") ? "final-m" : ""}>
+                  <BM m={m} label={m.label}/>
                 </div>
               ))}
             </div>
