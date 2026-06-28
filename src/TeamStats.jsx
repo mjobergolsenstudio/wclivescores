@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 // src/TeamStats.jsx — Per-team statistics panel
 
 const FLAGS = {
@@ -52,6 +54,14 @@ const TS = `
 .ts-scorer-name{flex:1;color:var(--text)}
 .ts-scorer-goals{font-family:'Orbitron',monospace;font-size:14px;color:#F59E0B}
 .ts-section-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#94A3B8;padding:10px 16px 4px}
+
+.fbtn{padding:6px 16px;border-radius:20px;border:1.5px solid #CBD5E1;background:transparent;color:#64748B;cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;transition:all .15s;}
+.fbtn.on{background:#EFF6FF;border-color:#1A56DB;color:#1A56DB;}
+.swrap{position:relative;margin-left:auto;}
+.swrap input{background:#fff;border:1.5px solid #CBD5E1;border-radius:20px;padding:6px 12px 6px 30px;color:#0F2340;font-family:'Rajdhani',sans-serif;font-size:13px;outline:none;width:160px;}
+.ts-match-opp{flex:1;color:#0F2340;display:flex;align-items:center;gap:6px;}
+.ts-match-date{font-size:10px;color:#94A3B8;white-space:nowrap;}
+.ts-scorer-name{flex:1;color:#0F2340;}
 `;
 
 function getTeamStats(team, matches) {

@@ -136,25 +136,25 @@ export default function SquadViewer() {
   const confirmedCount = Object.values(squads).filter(s=>s.confirmed&&s.players.length>0).length;
 
   return (
-    <div style={{ background:"#060A14", minHeight:"100vh", fontFamily:"'DM Sans',system-ui,sans-serif", color:"#E8EDF5" }}>
+    <div style={{ background:"#F0F6FF", minHeight:"100vh", fontFamily:"'DM Sans',system-ui,sans-serif", color:"#0F2340" }}>
 
       {/* HEADER */}
-      <div style={{ background:"#0D1525", borderBottom:"1px solid rgba(255,255,255,.07)", padding:"16px 20px" }}>
+      <div style={{ background:"#1A56DB", borderBottom:"none", padding:"16px 20px" }}>
         <div style={{ maxWidth:900, margin:"0 auto" }}>
-          <div style={{ fontSize:11, fontWeight:700, letterSpacing:3, textTransform:"uppercase", color:"#00E5FF", marginBottom:6 }}>
+          <div style={{ fontSize:11, fontWeight:700, letterSpacing:3, textTransform:"uppercase", color:"rgba(255,255,255,0.8)", marginBottom:6 }}>
             FIFA WORLD CUP 2026 · SQUADS
           </div>
           <div style={{ display:"flex", alignItems:"center", gap:12, flexWrap:"wrap" }}>
             <div style={{ fontSize:20, fontWeight:700, color:"#fff" }}>Official Squad Viewer</div>
             {!loading && (
-              <div style={{ fontSize:12, color:"#6B7FA3" }}>
+              <div style={{ fontSize:12, color:"rgba(255,255,255,0.7)" }}>
                 {confirmedCount > 0
                   ? `${confirmedCount}/48 squads confirmed`
                   : "Squads announced June 2"}
               </div>
             )}
             {updatedAt && (
-              <div style={{ fontSize:11, color:"#4A5E80", marginLeft:"auto" }}>
+              <div style={{ fontSize:11, color:"rgba(255,255,255,0.6)", marginLeft:"auto" }}>
                 Updated: {new Date(updatedAt).toLocaleString(undefined,{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}
               </div>
             )}
@@ -172,9 +172,9 @@ export default function SquadViewer() {
         )}
 
         {loading && (
-          <div style={{ background:"#0D1525", borderRadius:16, padding:40, textAlign:"center" }}>
+          <div style={{ background:"#fff", borderRadius:16, padding:40, textAlign:"center" }}>
             <div style={{ fontSize:24, marginBottom:8 }}>⚽</div>
-            <div style={{ fontSize:14, color:"#6B7FA3" }}>Loading squads from Wikipedia...</div>
+            <div style={{ fontSize:14, color:"rgba(255,255,255,0.7)" }}>Loading squads from Wikipedia...</div>
           </div>
         )}
 
@@ -182,17 +182,17 @@ export default function SquadViewer() {
           <>
             {/* FILTERS */}
             <div style={{ display:"flex", gap:8, marginBottom:16, flexWrap:"wrap", alignItems:"center" }}>
-              <button onClick={()=>setGroupFilter("all")} style={{ padding:"6px 14px", borderRadius:20, border:groupFilter==="all"?"1px solid #00E5FF":"1px solid rgba(255,255,255,.1)", background:groupFilter==="all"?"rgba(73,188,227,.12)":"transparent", color:groupFilter==="all"?"#00E5FF":"#6B7FA3", cursor:"pointer", fontSize:12, fontWeight:500, fontFamily:"inherit" }}>
+              <button onClick={()=>setGroupFilter("all")} style={{ padding:"6px 14px", borderRadius:20, border:groupFilter==="all"?"1.5px solid #1A56DB":"1.5px solid #CBD5E1", background:groupFilter==="all"?"#EFF6FF":"transparent", color:groupFilter==="all"?"#1A56DB":"#64748B", cursor:"pointer", fontSize:12, fontWeight:500, fontFamily:"inherit" }}>
                 All Groups
               </button>
               {"ABCDEFGHIJKL".split("").map(g => (
-                <button key={g} onClick={()=>setGroupFilter(g)} style={{ padding:"6px 12px", borderRadius:20, border:groupFilter===g?"1px solid #00E5FF":"1px solid rgba(255,255,255,.1)", background:groupFilter===g?"rgba(73,188,227,.12)":"transparent", color:groupFilter===g?"#00E5FF":"#6B7FA3", cursor:"pointer", fontSize:12, fontFamily:"inherit" }}>
+                <button key={g} onClick={()=>setGroupFilter(g)} style={{ padding:"6px 12px", borderRadius:20, border:groupFilter===g?"1.5px solid #1A56DB":"1.5px solid #CBD5E1", background:groupFilter===g?"#EFF6FF":"transparent", color:groupFilter===g?"#1A56DB":"#64748B", cursor:"pointer", fontSize:12, fontFamily:"inherit" }}>
                   Grp {g}
                 </button>
               ))}
               <div style={{ marginLeft:"auto", position:"relative" }}>
-                <span style={{ position:"absolute", left:11, top:"50%", transform:"translateY(-50%)", color:"#6B7FA3", fontSize:13, pointerEvents:"none" }}>🔍</span>
-                <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search team..." style={{ background:"#0D1525", border:"1px solid rgba(255,255,255,.1)", borderRadius:20, padding:"7px 14px 7px 34px", color:"#E8EDF5", fontFamily:"inherit", fontSize:12, width:160, outline:"none" }}/>
+                <span style={{ position:"absolute", left:11, top:"50%", transform:"translateY(-50%)", color:"rgba(255,255,255,0.7)", fontSize:13, pointerEvents:"none" }}>🔍</span>
+                <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search team..." style={{ background:"#F8FAFC", border:"1px solid rgba(255,255,255,.1)", borderRadius:20, padding:"7px 14px 7px 34px", color:"#0F2340", fontFamily:"inherit", fontSize:12, width:160, outline:"none" }}/>
               </div>
             </div>
 
@@ -224,11 +224,11 @@ export default function SquadViewer() {
             {team && (
               <>
                 {/* Team header */}
-                <div style={{ background:"#0D1525", border:"1px solid rgba(255,255,255,.07)", borderRadius:16, padding:"16px 20px", marginBottom:16, display:"flex", alignItems:"center", gap:16, flexWrap:"wrap" }}>
+                <div style={{ background:"#F8FAFC", border:"1px solid rgba(255,255,255,.07)", borderRadius:16, padding:"16px 20px", marginBottom:16, display:"flex", alignItems:"center", gap:16, flexWrap:"wrap" }}>
                   <div style={{ fontSize:48, lineHeight:1 }}>{FLAGS[selectedTeam]||"🏳️"}</div>
                   <div style={{ flex:1 }}>
                     <div style={{ fontSize:22, fontWeight:700, color:"#fff" }}>{selectedTeam}</div>
-                    <div style={{ fontSize:13, color:"#6B7FA3", marginTop:3 }}>
+                    <div style={{ fontSize:13, color:"rgba(255,255,255,0.7)", marginTop:3 }}>
                       Group {TEAM_GROUP[selectedTeam]}
                       {team.coach && team.coach !== "Unknown" && ` · Coach: ${team.coach}`}
                       {team.formation && ` · ${team.formation}`}
@@ -245,10 +245,10 @@ export default function SquadViewer() {
 
                 {/* Not confirmed yet */}
                 {!team.confirmed || team.players.length === 0 ? (
-                  <div style={{ background:"#0D1525", border:"1px solid rgba(255,255,255,.07)", borderRadius:16, padding:40, textAlign:"center" }}>
+                  <div style={{ background:"#F8FAFC", border:"1px solid rgba(255,255,255,.07)", borderRadius:16, padding:40, textAlign:"center" }}>
                     <div style={{ fontSize:32, marginBottom:12 }}>⏳</div>
                     <div style={{ fontSize:15, fontWeight:600, color:"#fff", marginBottom:6 }}>{selectedTeam} squad not yet announced</div>
-                    <div style={{ fontSize:13, color:"#6B7FA3" }}>All 48 squads confirmed by FIFA on June 2, 2026</div>
+                    <div style={{ fontSize:13, color:"rgba(255,255,255,0.7)" }}>All 48 squads confirmed by FIFA on June 2, 2026</div>
                   </div>
                 ) : view === "list" ? (
                   /* LIST VIEW */
@@ -271,7 +271,7 @@ export default function SquadViewer() {
                                   <div style={{ fontSize:13, fontWeight:600, color:star?"#FFD700":"#fff", display:"flex", alignItems:"center", gap:4, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>
                                     {p.name}{star&&<span style={{fontSize:10}}>⭐</span>}
                                   </div>
-                                  <div style={{ fontSize:11, color:"#6B7FA3", marginTop:1, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>
+                                  <div style={{ fontSize:11, color:"rgba(255,255,255,0.7)", marginTop:1, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>
                                     {p.club}{p.age?` · Age ${p.age}`:""}{p.caps?` · ${p.caps} caps`:""}
                                   </div>
                                 </div>
@@ -287,7 +287,7 @@ export default function SquadViewer() {
                   <div style={{ background:"linear-gradient(180deg,#0a3d0a 0%,#0d4a0d 40%,#0d4a0d 60%,#0a3d0a 100%)", borderRadius:16, padding:"28px 16px", position:"relative", minHeight:520, border:"2px solid rgba(255,255,255,.06)" }}>
                     <div style={{ position:"absolute", inset:16, border:"1px solid rgba(255,255,255,.1)", borderRadius:4, pointerEvents:"none" }}/>
                     <div style={{ position:"absolute", left:"50%", top:16, bottom:16, width:1, background:"rgba(255,255,255,.08)", transform:"translateX(-50%)", pointerEvents:"none" }}/>
-                    <div style={{ position:"absolute", left:"50%", top:"50%", width:80, height:80, borderRadius:"50%", border:"1px solid rgba(255,255,255,.08)", transform:"translate(-50%,-50%)", pointerEvents:"none" }}/>
+                    <div style={{ position:"absolute", left:"50%", top:"50%", width:80, height:80, borderRadius:"50%", border:"1px solid #E2E8F0", transform:"translate(-50%,-50%)", pointerEvents:"none" }}/>
 
                     {POS_ORDER.filter(pos=>byPos[pos]).map((pos, rowIdx, arr)=>{
                       const rowPlayers = byPos[pos].slice(0,6);
@@ -327,9 +327,9 @@ export default function SquadViewer() {
                       { l:"Avg age", v:team.players.filter(p=>p.age).length > 0 ? Math.round(team.players.filter(p=>p.age).reduce((s,p)=>s+p.age,0)/team.players.filter(p=>p.age).length) : "—" },
                       { l:"Group", v:`Group ${TEAM_GROUP[selectedTeam]}`, c:"#00E5FF" },
                     ].map(s=>(
-                      <div key={s.l} style={{ background:"#0D1525", border:"1px solid rgba(255,255,255,.07)", borderRadius:12, padding:"12px 14px", textAlign:"center" }}>
+                      <div key={s.l} style={{ background:"#F8FAFC", border:"1px solid rgba(255,255,255,.07)", borderRadius:12, padding:"12px 14px", textAlign:"center" }}>
                         <div style={{ fontSize:20, fontWeight:700, color:s.c||"#fff" }}>{s.v}</div>
-                        <div style={{ fontSize:10, fontWeight:600, letterSpacing:1, textTransform:"uppercase", color:"#6B7FA3", marginTop:3 }}>{s.l}</div>
+                        <div style={{ fontSize:10, fontWeight:600, letterSpacing:1, textTransform:"uppercase", color:"rgba(255,255,255,0.7)", marginTop:3 }}>{s.l}</div>
                       </div>
                     ))}
                   </div>
@@ -337,7 +337,7 @@ export default function SquadViewer() {
               </>
             )}
 
-            <div style={{ marginTop:16, fontSize:12, color:"#4A5E80", textAlign:"center" }}>
+            <div style={{ marginTop:16, fontSize:12, color:"rgba(255,255,255,0.6)", textAlign:"center" }}>
               ⭐ Star players &nbsp;·&nbsp; Data from Wikipedia, updates automatically &nbsp;·&nbsp;
               Official squads confirmed by FIFA June 2, 2026
             </div>
