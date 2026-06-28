@@ -213,7 +213,7 @@ body{background:#F0F6FF;color:#0F2340;font-family:'Rajdhani',sans-serif;overflow
 .logo{font-family:var(--fo);font-size:18px;font-weight:900;color:#fff;letter-spacing:-1px;flex-shrink:0;}
 .logo span{color:var(--sec);}
 .hdr-mid{flex:1;display:flex;justify-content:center;}
-.live-pill{display:flex;align-items:center;gap:7px;background:rgba(73,188,227,0.08);border:1px solid rgba(73,188,227,0.25);border-radius:20px;padding:5px 14px;font-family:var(--fo);font-size:9px;font-weight:700;color:var(--sec);letter-spacing:2px;}
+.live-pill{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.4);border-radius:20px;padding:5px 14px;font-family:var(--fo);font-size:9px;font-weight:700;color:#fff;letter-spacing:2px;}
 .lpd{width:6px;height:6px;border-radius:50%;background:var(--sec);box-shadow:0 0 6px var(--sec);animation:tdot 1.4s infinite;}
 .hdr-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
 .fav-btn-h{background:rgba(244,197,66,0.1);border:1px solid rgba(244,197,66,0.25);border-radius:8px;padding:6px 10px;font-size:14px;cursor:pointer;position:relative;}
@@ -314,14 +314,14 @@ body{background:#F0F6FF;color:#0F2340;font-family:'Rajdhani',sans-serif;overflow
 .evstrip button{font-family:var(--fo);font-size:8px;color:#1A56DB;letter-spacing:1px;background:none;border:none;cursor:pointer;}
 
 /* TIPPING */
-.tp{border-top:1px solid rgba(255,255,255,0.04);padding:9px 18px;background:rgba(244,197,66,0.02);display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
-.tlbl{font-family:var(--fo);font-size:8px;font-weight:700;letter-spacing:2px;color:var(--acc);min-width:36px;}
-.tinp{width:38px;height:30px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:4px;color:#fff;font-family:var(--fo);font-size:16px;text-align:center;outline:none;}
-.tinp:focus{border-color:var(--acc);}
-.tsep{font-family:var(--fo);font-size:14px;color:var(--muted2);}
-.tsave{padding:6px 12px;background:var(--acc);border:none;border-radius:4px;color:var(--dark);font-family:var(--fo);font-size:8px;font-weight:700;letter-spacing:2px;cursor:pointer;}
-.tr-ex{font-family:var(--fo);font-size:8px;padding:3px 9px;border-radius:3px;background:rgba(73,188,227,0.1);color:var(--sec);border:1px solid rgba(73,188,227,0.2);}
-.tr-ok{font-family:var(--fo);font-size:8px;padding:3px 9px;border-radius:3px;background:rgba(73,188,227,0.08);color:var(--sec);border:1px solid rgba(73,188,227,0.15);}
+.tp{border-top:1px solid #F1F5F9;padding:9px 18px;background:rgba(244,197,66,0.02);display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.tlbl{font-family:var(--fo);font-size:8px;font-weight:700;letter-spacing:2px;color:#D97706;min-width:36px;}
+.tinp{width:38px;height:30px;background:#fff;border:1px solid #CBD5E1;border-radius:4px;color:#fff;font-family:var(--fo);font-size:16px;text-align:center;outline:none;}
+.tinp:focus{border-color:#F59E0B;}
+.tsep{font-family:var(--fo);font-size:14px;color:#0F2340;}
+.tsave{padding:6px 12px;background:#F59E0B;border:none;border-radius:4px;color:var(--dark);font-family:var(--fo);font-size:8px;font-weight:700;letter-spacing:2px;cursor:pointer;}
+.tr-ex{font-family:var(--fo);font-size:8px;padding:3px 9px;border-radius:3px;background:#DBEAFE;color:#1A56DB;border:1px solid #93C5FD;}
+.tr-ok{font-family:var(--fo);font-size:8px;padding:3px 9px;border-radius:3px;background:#D1FAE5;color:#065F46;border:1px solid #6EE7B7;}
 .tr-no{font-family:var(--fo);font-size:8px;padding:3px 9px;border-radius:3px;background:rgba(239,68,68,0.08);color:#EF4444;border:1px solid rgba(239,68,68,0.15);}
 
 /* STANDINGS */
@@ -329,7 +329,7 @@ body{background:#F0F6FF;color:#0F2340;font-family:'Rajdhani',sans-serif;overflow
 .gtbl{background:#fff;border:1.5px solid #E2E8F0;border-radius:12px;overflow:hidden;}
 .gth{background:#1A56DB;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;}
 .gth h4{font-family:var(--fo);font-size:11px;letter-spacing:2px;color:#fff;}
-.gth span{font-family:var(--fb);font-size:11px;color:rgba(255,255,255,0.6);}
+.gth span{font-family:var(--fb);font-size:11px;color:rgba(255,255,255,0.75);}
 .gtbl table{width:100%;border-collapse:collapse;}
 .gtbl th{font-family:var(--fo);font-size:7px;font-weight:700;letter-spacing:2px;color:#64748B;text-transform:uppercase;padding:7px 10px 5px;text-align:center;border-bottom:1px solid var(--border2);background:rgba(0,0,0,0.15);}
 .gtbl th:first-child{text-align:left;padding-left:12px;}
@@ -338,7 +338,7 @@ body{background:#F0F6FF;color:#0F2340;font-family:'Rajdhani',sans-serif;overflow
 .gtbl tr:last-child td{border-bottom:none;}
 .gtbl tr.q1 td{background:#EFF6FF;}
 .gtbl tr.q2 td{background:#F8FBFF;}
-.tc{display:flex;align-items:center;gap:6px;font-weight:600;}
+.tc{display:flex;align-items:center;gap:6px;font-weight:600;color:#0F2340;}
 .pos{width:17px;height:17px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:var(--fo);font-size:8px;font-weight:900;flex-shrink:0;}
 .p1{background:#1A56DB;color:#fff;}
 .p2{background:#DBEAFE;color:#1A56DB;}
@@ -469,7 +469,7 @@ export default function App(){
           <div className="team"><span className="flag">{FLAGS[m.home]||"🏳️"}</span><span className={`tname${hw?" win":""}`}>{m.home}</span></div>
           <div className="sb">
             {m.status==="upcoming"?(<><div className="vs">VS</div><div><span className="badge bu">{fmtD(m.kickoff)}</span></div><div className="kick">🕐 {fmtT(m.kickoff)}</div></>)
-            :(<><div className={`score${m.status==="live"?" lv":""}`}>{m.home_score??"-"}<span style={{color:"var(--muted2)",fontSize:18}}> – </span>{m.away_score??"-"}</div>
+            :(<><div className={`score${m.status==="live"?" lv":""}`}>{m.home_score??"-"}<span style={{color:"#64748B",fontSize:18}}> – </span>{m.away_score??"-"}</div>
                {m.status==="live"&&<div><span className="badge bl">● {m.minute||0}'</span></div>}
                {m.status==="finished"&&<div><span className="badge bf">Full Time</span></div>}
                <div className="meta">{m.venue}</div></>)}
@@ -660,10 +660,10 @@ export default function App(){
               {title:"Dark Horses — 7 Underdogs to Watch",desc:"Japan, Norway, Uruguay and the teams that could shock everyone.",url:"/blog/world-cup-2026-dark-horses.html",tag:"Dark Horses"},
             ].map((a,i)=>(
               <a key={i} href={a.url}
-                style={{background:"rgba(255,255,255,0.04)",border:"1.5px solid rgba(255,255,255,0.07)",borderRadius:12,padding:16,textDecoration:"none",display:"flex",flexDirection:"column",gap:8,transition:"border-color .2s,transform .2s"}}>
-                <div style={{fontFamily:"var(--fo)",fontSize:9,letterSpacing:2,color:"var(--sec)",textTransform:"uppercase"}}>{a.tag}</div>
-                <div style={{fontSize:15,fontWeight:700,color:"#fff",lineHeight:1.3}}>{a.title}</div>
-                <div style={{fontSize:12,color:"var(--muted)",lineHeight:1.5}}>{a.desc}</div>
+                style={{background:"#fff",border:"1.5px solid #E2E8F0",borderRadius:12,padding:16,textDecoration:"none",display:"flex",flexDirection:"column",gap:8,transition:"border-color .2s,transform .2s",boxShadow:"0 1px 4px rgba(0,0,0,0.05)"}}>
+                <div style={{fontFamily:"'Orbitron',monospace",fontSize:9,letterSpacing:2,color:"#1A56DB",textTransform:"uppercase"}}>{a.tag}</div>
+                <div style={{fontSize:15,fontWeight:700,color:"#0F2340",lineHeight:1.3}}>{a.title}</div>
+                <div style={{fontSize:12,color:"#64748B",lineHeight:1.5}}>{a.desc}</div>
                 <div style={{fontFamily:"var(--fo)",fontSize:8,color:"var(--sec)",letterSpacing:1,marginTop:4}}>READ ARTICLE</div>
               </a>
             ))}
@@ -691,7 +691,7 @@ export default function App(){
         })}
       </>)}
 
-      <div style={{textAlign:"center",color:"#94A3B8",fontFamily:"var(--fo)",fontSize:"7px",letterSpacing:"3px",marginTop:60,borderTop:"1px solid rgba(255,255,255,0.03)",paddingTop:20}}>
+      <div style={{textAlign:"center",color:"#94A3B8",fontFamily:"'Orbitron',monospace",fontSize:"7px",letterSpacing:"3px",marginTop:60,borderTop:"1px solid rgba(255,255,255,0.03)",paddingTop:20}}>
         {lastUp&&!isSim&&<span>Updated {lastUp.toLocaleTimeString(undefined,{hour:"2-digit",minute:"2-digit"})} · </span>}
         Not Affiliated With FIFA · wclivescores.com
       </div>

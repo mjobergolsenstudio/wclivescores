@@ -20,38 +20,38 @@ function fmtTime(iso) { return new Date(iso).toLocaleTimeString(undefined,{hour:
 
 const TS = `
 .ts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:8px}
-.ts-card{background:var(--s1);border:1px solid var(--border);border-radius:16px;overflow:hidden}
-.ts-head{background:var(--s2);padding:14px 16px;display:flex;align-items:center;gap:12px}
+.ts-card{background:#FFFFFF;border:1px solid #E2E8F0;border-radius:16px;overflow:hidden}
+.ts-head{background:#EFF6FF;padding:14px 16px;display:flex;align-items:center;gap:12px}
 .ts-flag{font-size:36px;line-height:1}
-.ts-name{font-family:var(--fd);font-size:22px;letter-spacing:1px;color:#fff}
-.ts-group{font-size:11px;color:var(--muted);letter-spacing:1px;margin-top:2px}
-.ts-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
-.ts-stat{background:var(--s1);padding:10px 8px;text-align:center}
-.ts-stat-num{font-family:var(--fd);font-size:24px;color:#fff;line-height:1}
-.ts-stat-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.ts-name{font-family:'Orbitron',monospace;font-size:22px;letter-spacing:1px;color:#0F2340}
+.ts-group{font-size:11px;color:#94A3B8;letter-spacing:1px;margin-top:2px}
+.ts-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#E2E8F0}
+.ts-stat{background:#FFFFFF;padding:10px 8px;text-align:center}
+.ts-stat-num{font-family:'Orbitron',monospace;font-size:24px;color:#0F2340;line-height:1}
+.ts-stat-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#94A3B8;margin-top:3px}
 .ts-form{display:flex;gap:4px;padding:10px 16px;align-items:center}
-.ts-form-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.ts-form-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#94A3B8;margin-right:4px}
 .ts-form-dot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
 .ts-form-w{background:rgba(73,188,227,.2);color:var(--live)}
 .ts-form-d{background:rgba(73,188,227,.15);color:var(--accent)}
 .ts-form-l{background:rgba(255,80,80,.15);color:#FF8080}
-.ts-form-u{background:var(--s2);color:var(--muted)}
+.ts-form-u{background:#F8FAFC;color:#94A3B8}
 .ts-matches{padding:0 16px 12px}
-.ts-match-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px}
+.ts-match-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #E2E8F0;font-size:12px}
 .ts-match-row:last-child{border-bottom:none}
 .ts-match-opp{flex:1;color:var(--text);display:flex;align-items:center;gap:6px}
-.ts-match-score{font-family:var(--fd);font-size:14px;letter-spacing:1px;color:var(--muted)}
+.ts-match-score{font-family:'Orbitron',monospace;font-size:14px;letter-spacing:1px;color:#94A3B8}
 .ts-match-score.win{color:var(--live)}
 .ts-match-score.draw{color:var(--accent)}
 .ts-match-score.loss{color:#FF8080}
 .ts-match-date{font-size:10px;color:var(--muted2);white-space:nowrap}
-.ts-no-matches{padding:16px;font-size:12px;color:var(--muted);text-align:center;font-style:italic}
+.ts-no-matches{padding:16px;font-size:12px;color:#94A3B8;text-align:center;font-style:italic}
 .ts-scorers{padding:0 16px 12px}
-.ts-scorer-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border);font-size:12px}
+.ts-scorer-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #E2E8F0;font-size:12px}
 .ts-scorer-row:last-child{border-bottom:none}
 .ts-scorer-name{flex:1;color:var(--text)}
-.ts-scorer-goals{font-family:var(--fd);font-size:14px;color:var(--gold)}
-.ts-section-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);padding:10px 16px 4px}
+.ts-scorer-goals{font-family:'Orbitron',monospace;font-size:14px;color:#F59E0B}
+.ts-section-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#94A3B8;padding:10px 16px 4px}
 `;
 
 function getTeamStats(team, matches) {
