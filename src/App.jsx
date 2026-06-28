@@ -239,6 +239,21 @@ body{background:#F0F6FF;color:#0F2340;font-family:'Rajdhani',sans-serif;overflow
 .sinp:focus{border-color:var(--sec);}
 .sico{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px;pointer-events:none;}
 
+/* DROPDOWN NAV */
+.dd-wrap{position:relative;}
+.dd-btn{display:flex;align-items:center;gap:8px;background:#1A56DB;border:none;border-radius:10px;padding:9px 16px;font-family:var(--fo);font-size:10px;font-weight:700;letter-spacing:2px;color:#fff;cursor:pointer;text-transform:uppercase;white-space:nowrap;transition:background .2s;}
+.dd-btn:hover{background:#1447C0;}
+.dd-arrow{font-size:10px;transition:transform .2s;}
+.dd-arrow.open{transform:rotate(180deg);}
+.dd-menu{position:absolute;top:calc(100% + 6px);left:0;background:#fff;border:1.5px solid #E2E8F0;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,0.12);min-width:200px;z-index:100;overflow:hidden;animation:dd-in .15s ease;}
+@keyframes dd-in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.dd-item{display:flex;align-items:center;gap:10px;padding:12px 16px;font-family:var(--fo);font-size:9px;font-weight:700;letter-spacing:1.5px;color:#64748B;cursor:pointer;border:none;background:transparent;width:100%;text-align:left;text-transform:uppercase;border-bottom:1px solid #F1F5F9;transition:all .15s;}
+.dd-item:last-child{border-bottom:none;}
+.dd-item:hover{background:#EFF6FF;color:#1A56DB;}
+.dd-item.on{background:#EFF6FF;color:#1A56DB;font-weight:900;}
+.dd-item-ico{font-size:14px;}
+.dd-overlay{position:fixed;inset:0;z-index:99;}
+
 /* CONTENT */
 .app{max-width:920px;margin:0 auto;padding:16px 16px 100px;position:relative;z-index:1;}
 
@@ -390,6 +405,7 @@ export default function App(){
   const[ftNames,setFtNames]=useState(()=>{try{return JSON.parse(localStorage.getItem("wc_ft")||"[]");}catch{return[];}});
   const[tips,setTips]=useState(()=>{try{return JSON.parse(localStorage.getItem("wc_tips")||"{}");}catch{return{};}});
   const[draft,setDraft]=useState({});
+  const[menuOpen,setMenuOpen]=useState(false);
 
   const fetch_=useCallback(async()=>{
     try{
@@ -521,29 +537,51 @@ export default function App(){
         </div>
     </div>
 
-    {/* NAV */}
+    {/* NAV — dropdown + filters */}
     <div className="nav" style={{position:"sticky",top:88,zIndex:20}}>
-        <div className="nr1">
-          {[{id:"matches",l:"Matches"},{id:"tables",l:"Standings"},{id:"bracket",l:"Bracket"},{id:"squads",l:"Squads"},{id:"teams",l:"Teams"},{id:"teamstats",l:"Stats"},{id:"blog",l:"Blog"},{id:"favorites",l:"Favourites"}].map(t=>(
-            <button key={t.id} className={`nt${tab===t.id?" on":""}`} onClick={()=>setTab(t.id)}>{t.l}</button>
-          ))}
+      <div style={{display:"flex",alignItems:"center",gap:8,padding:"8px 16px",borderBottom:"1px solid #F1F5F9",flexWrap:"wrap"}}>
+
+        {/* Dropdown menu button */}
+        <div className="dd-wrap">
+          {menuOpen&&<div className="dd-overlay" onClick={()=>setMenuOpen(false)}/>}
+          <button className="dd-btn" onClick={()=>setMenuOpen(o=>!o)}>
+            ☰ {[{id:"matches",l:"Matches"},{id:"tables",l:"Standings"},{id:"bracket",l:"Bracket"},{id:"squads",l:"Squads"},{id:"teams",l:"Teams"},{id:"teamstats",l:"Stats"},{id:"blog",l:"Blog"},{id:"favorites",l:"Favs"}].find(t=>t.id===tab)?.l||"Menu"}
+            <span className={`dd-arrow${menuOpen?" open":""}`}>▼</span>
+          </button>
+          {menuOpen&&(
+            <div className="dd-menu">
+              {[
+                {id:"matches",l:"Matches",ico:"⚽"},
+                {id:"tables",l:"Standings",ico:"📊"},
+                {id:"bracket",l:"Bracket",ico:"🏆"},
+                {id:"squads",l:"Squads",ico:"👥"},
+                {id:"teams",l:"All Teams",ico:"🌍"},
+                {id:"teamstats",l:"Stats",ico:"📈"},
+                {id:"blog",l:"Blog",ico:"📝"},
+                {id:"favorites",l:"Favourites",ico:"⭐"},
+              ].map(t=>(
+                <button key={t.id} className={`dd-item${tab===t.id?" on":""}`}
+                  onClick={()=>{setTab(t.id);setMenuOpen(false);}}>
+                  <span className="dd-item-ico">{t.ico}</span>{t.l}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
-        {/* NAV ROW 2 — contextual filters */}
-        {(tab==="matches"||tab==="favorites"||tab==="tables")&&(
-          <div className="nr2">
-            {(tab==="matches"||tab==="favorites")&&(
-              <>{[{v:"all",l:"All"},{v:"live",l:"● Live"},{v:"upcoming",l:"Upcoming"},{v:"finished",l:"Finished"}].map(f=>(
-                <button key={f.v} className={`nf${sf===f.v?" on":""}${f.v==="live"?" lf":""}`} onClick={()=>setSf(f.v)}>{f.l}</button>
-              ))}<div className="ndiv"/></>
-            )}
-            <button className={`nf${gf==="all"?" on":""}`} onClick={()=>setGf("all")}>All</button>
-            {gkeys.map(g=><button key={g} className={`nf${gf===g?" on":""}`} onClick={()=>setGf(g)} style={{fontSize:11}}>G{g}</button>)}
-            {(tab==="matches"||tab==="favorites")&&(
-              <div className="si"><span className="sico">🔍</span><input className="sinp" placeholder="Search..." value={q} onChange={e=>setQ(e.target.value)}/></div>
-            )}
-          </div>
+        {/* Contextual filters inline */}
+        {(tab==="matches"||tab==="favorites")&&(
+          <>{[{v:"all",l:"All"},{v:"live",l:"● Live"},{v:"upcoming",l:"Upcoming"},{v:"finished",l:"Finished"}].map(f=>(
+            <button key={f.v} className={`nf${sf===f.v?" on":""}${f.v==="live"?" lf":""}`} onClick={()=>setSf(f.v)}>{f.l}</button>
+          ))}</>
         )}
+        {(tab==="tables")&&(
+          <>{gkeys.map(g=><button key={g} className={`nf${gf===g?" on":""}`} onClick={()=>setGf(g)} style={{fontSize:11}}>G{g}</button>)}</>
+        )}
+        {(tab==="matches"||tab==="favorites")&&(
+          <div className="si" style={{marginLeft:"auto"}}><span className="sico">🔍</span><input className="sinp" placeholder="Search..." value={q} onChange={e=>setQ(e.target.value)}/></div>
+        )}
+      </div>
     </div>
 
     <div className="app">
