@@ -4,6 +4,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import Bracket from "./Bracket.jsx";
 import TeamStats from "./TeamStats.jsx";
+import PlayerStats from "./PlayerStats.jsx";
 import SquadViewer from "./SquadViewer.jsx";
 import MatchModal from "./MatchModal.jsx";
 
@@ -557,6 +558,7 @@ export default function App(){
                 {id:"squads",l:"Squads",ico:"👥"},
                 {id:"teams",l:"All Teams",ico:"🌍"},
                 {id:"teamstats",l:"Stats",ico:"📈"},
+                {id:"playerstats",l:"Player Stats",ico:"👟"},
                 {id:"blog",l:"Blog",ico:"📝"},
                 {id:"favorites",l:"Favourites",ico:"⭐"},
               ].map(t=>(
@@ -673,7 +675,10 @@ export default function App(){
 
       {tab==="bracket"&&<><div className="sl">Knockout Bracket</div><Bracket matches={matches}/></>}
       {tab==="squads"&&<><div className="sl">Official Squads</div><SquadViewer/></>}
-      {tab==="teamstats"&&<><div className="sl">Team Statistics</div><TeamStats matches={matches} favTeams={ftNames}/></>}
+      {tab==="teamstats"&&<><div className="sl">Team Statistics</div><TeamStats matches={matches} favTeams={ftNames}/></>
+}
+
+      {tab==="playerstats"&&<><div className="sl">Player Statistics</div><PlayerStats matches={matches}/></>}
 
       {/* ALL TEAMS */}
       {tab==="teams"&&(<>
